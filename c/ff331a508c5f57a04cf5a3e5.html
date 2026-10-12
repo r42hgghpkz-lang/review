@@ -1,0 +1,97 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>审阅</title><meta name="robots" content="noindex">
+<script>(function(){var m=localStorage.getItem('rv-theme');if(m)document.documentElement.dataset.theme=m})()</script><style>
+:root{--bg:#faf8f3;--fg:#2b2b2b;--mu:#999;--ac:#c0392b;--hl:#fff1b8;--hv:#f1ece2;--card:#fff;--bd:#e6e0d4;--hd:#fffdf8ee}
+@media(prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#1b1c1e;--fg:#d8d4cc;--mu:#777;--ac:#e0705f;--hl:#4a4020;--hv:#26272a;--card:#242528;--bd:#34353a;--hd:#1b1c1eee}}
+:root[data-theme=dark]{--bg:#1b1c1e;--fg:#d8d4cc;--mu:#777;--ac:#e0705f;--hl:#4a4020;--hv:#26272a;--card:#242528;--bd:#34353a;--hd:#1b1c1eee}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font-family:"PingFang SC","Noto Serif CJK SC","Source Han Serif SC","Songti SC",serif}
+header{position:sticky;top:0;background:var(--hd);border-bottom:1px solid var(--bd);padding:8px 16px;display:flex;gap:8px;align-items:center;z-index:5;font-family:sans-serif;font-size:14px}
+header b{flex:1;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}#st{color:var(--mu);font-size:12px}
+button{font:inherit;color:var(--fg);border:1px solid var(--bd);background:var(--card);border-radius:6px;padding:4px 10px;cursor:pointer}
+.wrap{display:flex;max-width:1200px;margin:auto}main{flex:1;max-width:760px;margin:auto;padding:24px 20px 140px}
+p{position:relative;font-size:18px;line-height:1.95;margin:0 0 .9em;text-indent:2em;text-align:justify;padding:2px 6px;border-radius:4px}
+p:hover{background:var(--hv)}p.has{background:var(--hl)}p.sel{outline:2px solid var(--ac)}
+p .n{position:absolute;left:-2.4em;top:.35em;text-indent:0;font:12px/1 sans-serif;color:var(--mu);width:2em;text-align:right;user-select:none}
+aside{width:340px;border-left:1px solid var(--bd);height:calc(100vh - 45px);position:sticky;top:45px;overflow:auto;padding:12px;font-family:sans-serif;font-size:14px}
+.c{background:var(--card);border:1px solid var(--bd);border-radius:8px;padding:8px;margin-bottom:10px}.c .q{color:var(--mu);border-left:3px solid var(--ac);padding-left:6px;margin:4px 0}.c .h{color:var(--ac);font-size:12px;cursor:pointer}
+#ed{position:fixed;left:50%;bottom:16px;transform:translateX(-50%);width:min(560px,94vw);background:var(--card);border:1px solid var(--bd);border-radius:10px;box-shadow:0 6px 24px #0004;padding:10px;display:none;z-index:9;font-family:sans-serif}
+#ed textarea{width:100%;height:80px;font:15px/1.5 sans-serif;border:1px solid var(--bd);background:var(--bg);color:var(--fg);border-radius:6px;padding:6px}#ed .q{color:var(--mu);font-size:13px;max-height:3em;overflow:hidden;margin-bottom:6px}
+#fb{position:fixed;display:none;z-index:8;background:var(--ac);color:#fff;border:0;padding:8px 16px;border-radius:20px;box-shadow:0 3px 10px #0004;font-family:sans-serif}
+#tg{display:none}#df{max-width:760px;margin:16px auto 0;padding:0 20px;font-family:sans-serif;font-size:14px}#df details{border:1px solid var(--bd);border-radius:8px;padding:8px 12px;background:var(--card)}#df .pr{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:8px 0;border-top:1px dashed var(--bd);padding-top:8px}#df .b4{color:var(--mu);text-decoration:line-through;text-decoration-color:#c0392b80}#df .af{color:var(--fg)}#df .mt{color:var(--mu);font-size:12px}@media(max-width:600px){#df .pr{grid-template-columns:1fr}}#meta{color:var(--mu);font-size:12px}.big{background:var(--ac);color:#fff;border-color:var(--ac);font-size:15px;padding:7px 16px;font-weight:600}
+#cbx{position:fixed;inset:20% 5% auto 5%;height:50%;z-index:20;display:none;width:90%;font:14px/1.5 sans-serif;background:var(--card);color:var(--fg);border:2px solid var(--ac);border-radius:8px;padding:8px}
+@media(max-width:600px){#xm,#xj,#cp,#sub,#meta{display:none}.big{font-size:14px;padding:6px 10px}}
+@media(max-width:900px){aside{display:none;position:fixed;inset:45px 0 0 0;width:auto;height:auto;background:var(--bg);z-index:6}aside.open{display:block}#tg{display:inline}p .n{position:static;display:inline-block;width:auto;margin-right:.4em}p{font-size:17px;text-indent:0}header{padding:8px}}
+</style></head><body><header><a href="../index.html" style="text-decoration:none;color:var(--mu)">← 目录</a><b id="hdt">审阅</b><span id="meta"></span><span id="st"></span><button id="lk" class="big" style="background:#2e8b57;border-color:#2e8b57">通过锁定</button><button id="rj" class="big">打回</button><button id="sub">提交批注</button><button id="cp">复制全部批注</button><button id="tg">批注</button><button id="xm">MD</button><button id="xj">JSON</button><button id="th" title="浅色/深色">◐</button></header>
+<div id="df"></div><div class="wrap"><main id="m"></main><aside id="sd"></aside></div>
+<button id="fb">批注</button><textarea id="cbx" readonly></textarea>
+<div id="ed"><div class="q" id="eq"></div><textarea id="et" placeholder="写批注…（Ctrl+Enter 保存）"></textarea><div style="text-align:right;margin-top:6px"><button id="ec">取消</button> <button id="es" style="background:var(--ac);color:#fff;border-color:var(--ac)">保存</button></div></div>
+<div id="gate" style="position:fixed;inset:0;z-index:50;background:var(--bg);display:flex;align-items:center;justify-content:center;font-family:sans-serif"><form id="gf" style="width:min(340px,90vw);background:var(--card);border:1px solid var(--bd);border-radius:12px;padding:20px">
+<div style="font-size:17px;margin-bottom:10px">请输入阅读密码</div><input id="gp" type="password" autocomplete="current-password" style="width:100%;font-size:16px;padding:8px;border:1px solid var(--bd);border-radius:6px;background:var(--bg);color:var(--fg)">
+<label style="display:block;margin:10px 0;font-size:14px"><input type="checkbox" id="gr"> 记住密码（仅本机）</label><button style="width:100%;padding:8px;background:var(--ac);color:#fff;border:0;border-radius:6px">打开</button><div id="gm" style="color:var(--ac);font-size:13px;margin-top:8px"></div></form></div>
+<script>
+const ENC="RGP+Geu44ww7iE4isWzp3Qg5mlxXV3pqHxzJYUrThlbwj7TzBdNoo9NmGXj6F8hBzWniuqjvJbiNKgXPSArNXu17qGrAZ0EihcE2oAbaC2fSdqC1VufqZvC4eblZ5sQkCw53aKMDgxshh6nxw67ooh+c7MsTn2okMtFkxOObYuFWGa0l6CujiKQfcqrXsCS0/J0erVTR3E91+t/xd2LzQXbE/CNAaGi10BaXDNIwxc8JHNdoqKn2gRfxTTp+glTTtbVMhXhpPr54KnBV5ZXSe1NMRXOF1ktLgXxyXAtWBIb/d3uIlafsd/38rHEGptCe5Z5a4nFhoOivOp0g+Ly52+NVObhabWxBYgl0tEyidV51xqcTz12ibwNwF1ydusvtOwVaa6iLFv/ikKZiNBgheU1TFZYDPjrY7YZOnvYBFNr+PveKdEhDmCUuYtWk2Qxfspv1pyiiVshPTEyR1+tMddDCbpO7MHp6rpnGKan6BJ9G7aMzerjww6NoLW12v1ENrrh/7XKBlkXJ3SpaOxD2P9TzthOUDKNOg21lsvk7ND6HDJ3BB6OvGLnWAC2CuKPZc3Uvoaykzt2W3wesHfnywMKcTG8c/38qo70LR+xi0SxnZShakcpxhTlCpUZAYqs7jDP1eUavZse6tX3F4PQdPOUI4sy59Ge6L4VT2en31RV7hr+Ak2HZf7ksybXqJjSftzZlONz1McCDp/+H7Bc5mQxV5WOlipuePCjKDc7C/YtpyAUF4rpUqq+qeOmX/SL0+QFmhqpQU0vVR5v/s6ZK9APfloRzx23ZRj0/igdmlu4SXWwjX6LrIwD5o74eyJAI3ruIYt9k/sefEPMuB8dd8FxEWDF+idsHXSCHvYDPHCCjjxkeOFkm1N1cITdKeqKZuWiSNcxJaGd7wjiFbstzhBxVKTD8DN9xvvnh2yNuhNk92vRSSaxeQocaCyG/FWtURhM1mcLU0ftS3BZ1kx7yALACP2nXmW/gmxBrVfhT7OhmxY2S6JmZs+vnpU6akusxTdZzoMfo1bDWAlnT1qIumwhsLbSw7EKFmU0P4ayWMZ9wg/945xF95jV+fp6o85UojilRlYC6jcAp",FID="ff331a508c5f57a04cf5a3e5";let PW=null,P=null;
+const b2u=b=>Uint8Array.from(atob(b),c=>c.charCodeAt(0)),u2b=u=>{let s='';for(let i=0;i<u.length;i+=8192)s+=String.fromCharCode.apply(null,u.subarray(i,i+8192));return btoa(s)};
+async function dk(pw,salt){let k=await crypto.subtle.importKey('raw',new TextEncoder().encode(pw),'PBKDF2',false,['deriveKey']);return crypto.subtle.deriveKey({name:'PBKDF2',salt,iterations:600000,hash:'SHA-256'},k,{name:'AES-GCM',length:256},false,['encrypt','decrypt'])}
+async function decText(pw,b){let r=b2u(b);return new TextDecoder().decode(await crypto.subtle.decrypt({name:'AES-GCM',iv:r.slice(16,28)},await dk(pw,r.slice(0,16)),r.slice(28)))}
+async function encText(t){let s=crypto.getRandomValues(new Uint8Array(16)),iv=crypto.getRandomValues(new Uint8Array(12)),c=new Uint8Array(await crypto.subtle.encrypt({name:'AES-GCM',iv},await dk(PW,s),new TextEncoder().encode(t)));let o=new Uint8Array(28+c.length);o.set(s);o.set(iv,16);o.set(c,28);return u2b(o)}
+async function unlock(pw,remember){P=JSON.parse(await decText(pw,ENC));PW=pw;if(remember)localStorage.setItem('rv-pw',pw);document.getElementById('gate').remove();
+document.title=P.title;document.getElementById('hdt').textContent=P.book+'·'+P.title;let sc=document.createElement('script');sc.textContent=document.getElementById('main').textContent;document.body.append(sc)}
+document.getElementById('gf').onsubmit=async e=>{e.preventDefault();let m=document.getElementById('gm');if(!window.crypto||!crypto.subtle){m.textContent='浏览器不支持解密（需 https）';return}m.textContent='解密中…';
+try{await unlock(document.getElementById('gp').value,document.getElementById('gr').checked)}catch(x){m.textContent='密码不对'}};
+(async()=>{let h=new URLSearchParams(location.hash.slice(1)).get('k');if(h){try{await unlock(h,true);history.replaceState(null,'',location.pathname+location.search);return}catch(e){}}let s=localStorage.getItem('rv-pw');if(s){try{await unlock(s,true)}catch(e){localStorage.removeItem('rv-pw')}}})();
+</script>
+<script type="text/plain" id="main">
+const D=P.paras,K='rv:'+FID+':'+P.fp,TITLE=P.title,BOOK=P.book,CH=P.ch,REPO='https://github.com/r42hgghpkz-lang/review/issues/new';let A=[],cur=null,pend=null;const $=i=>document.getElementById(i);
+const m=$('m'),sd=$('sd'),st=$('st');
+D.forEach((t,i)=>{let p=document.createElement('p');p.id='p'+(i+1);p.dataset.n=i+1;p.innerHTML='<span class="n">'+(i+1)+'</span>';p.append(document.createTextNode(t));m.append(p)});
+const txt=p=>p.childNodes[1].textContent;
+const enc=o=>btoa(unescape(encodeURIComponent(JSON.stringify(o)))).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');
+const dec=h=>JSON.parse(decodeURIComponent(escape(atob(h.replace(/-/g,'+').replace(/_/g,'/')))));
+function sync(){let o={v:Date.now(),a:A};try{localStorage.setItem(K,JSON.stringify(o))}catch(e){}
+st.textContent='✓ 已保存 '+new Date().toTimeString().slice(0,5)}
+function load(){let h=null,l=null;try{let m=location.hash.match(/n=([\w-]+)/);if(m)h=dec(m[1])}catch(e){}try{l=JSON.parse(localStorage.getItem(K)||'null')}catch(e){}
+let o=[h,l].filter(x=>x&&x.a).sort((x,y)=>y.v-x.v)[0];A=o?o.a:[];st.textContent=A.length?'✓ 已载入':'';if(o)sync();render()}
+function plain(){return A.slice().sort((a,b)=>a.n-b.n).map(x=>'¶'+x.n+'｜'+x.q.replace(/\s*\n\s*/g,' ')+'｜'+x.c.replace(/\s*\n\s*/g,' ')).join('\n')}
+function boxCopy(t){let b=$('cbx');b.value=t;b.style.display='block';b.focus();b.select();b.setSelectionRange(0,t.length);st.textContent='请长按/Ctrl+C 复制，点空白处关闭'}
+function legacy(t){let ta=document.createElement('textarea');ta.value=t;ta.setAttribute('readonly','');ta.style.cssText='position:fixed;top:0;left:0;opacity:0';document.body.append(ta);ta.select();ta.setSelectionRange(0,t.length);let ok=false;try{ok=document.execCommand('copy')}catch(e){}ta.remove();return ok}
+async function copyAll(){if(!A.length){st.textContent='还没有批注';return}let t=plain();
+try{if(navigator.clipboard&&window.isSecureContext){await navigator.clipboard.writeText(t);return done('clipboard')}}catch(e){}
+if(legacy(t))return done('execCommand');boxCopy(t)}
+function done(w){st.textContent='✓ 已复制 '+A.length+' 条';window.__copied=w}
+function dl(name,text,type){let blob=new Blob([text],{type:type+';charset=utf-8'}),u=URL.createObjectURL(blob),a=document.createElement('a');a.href=u;a.download=name;a.rel='noopener';a.style.display='none';document.body.append(a);a.click();setTimeout(()=>{a.remove();URL.revokeObjectURL(u)},4000)}
+async function submit(action){if(action=='打回'&&!A.length){alert('打回请先写批注（点段落或选中文字）。');return}
+if(action=='批注'&&!A.length){st.textContent='还没有批注';return}
+if(action=='锁定'&&!confirm('确认通过并锁定这一版？'))return;if(action=='打回'&&!confirm('确认打回？共 '+A.length+' 条批注会一并提交。'))return;
+let payload={v:1,action,book:BOOK,ch:CH,fid:FID,fp:P.fp,time:new Date().toISOString(),notes:so().map(x=>({n:x.n,q:x.q,c:x.c,t:x.t}))};
+let title=(action=='批注'?'批注+':'审阅+')+Math.random().toString(36).slice(2,8),body=await encText(JSON.stringify(payload)),u=REPO+'?title='+encodeURIComponent(title)+'&body='+encodeURIComponent(body);
+if(u.length<=7000){window.open(u,'_blank')||(location.href=u);st.textContent='已打开 GitHub，点 Submit 提交';return}
+let w=window.open(REPO+'?title='+encodeURIComponent(title),'_blank'),ok=false;
+try{if(navigator.clipboard&&window.isSecureContext){await navigator.clipboard.writeText(body);ok=true}}catch(e){}
+if(!ok)ok=legacy(body);if(ok){st.textContent='已复制，粘贴即可';alert('已复制（已加密），粘贴即可。\n在打开的 GitHub 页面正文框里粘贴，再点 Submit。')}else boxCopy(body);if(!w)location.href=REPO+'?title='+encodeURIComponent(title)}
+function diffs(){let d=P.diffs||[];if(!d.length)return;let h=document.createElement('details');let sm=document.createElement('summary');sm.textContent='上一版改了 '+d.length+' 处（'+(P.diffFrom||'')+'）— 点开看对照';h.append(sm);
+d.forEach(x=>{let r=document.createElement('div');r.className='pr';let b=document.createElement('div'),a=document.createElement('div');b.className='b4';a.className='af';b.textContent=x.b||'（无）';a.textContent=x.a||'（删去）';
+let m=document.createElement('div');m.className='mt';m.style.gridColumn='1/-1';m.textContent=x.n?('改后 ¶'+x.n):'';r.append(m,b,a);h.append(r)});$('df').append(h)}
+const so=()=>A.slice().sort((a,b)=>a.n-b.n);
+function render(){document.querySelectorAll('p.has').forEach(p=>p.classList.remove('has'));sd.innerHTML=A.length?'':'<div style="color:var(--mu)">选中文字后点「批注」，或直接点段落。批注自动保存在本机和网址里；写完点「通过锁定」或「打回」（打回会带上批注），在 GitHub 页面点 Submit 即可。</div>';
+A.slice().sort((a,b)=>a.n-b.n||(a.t<b.t?-1:1)).forEach(x=>{let p=$('p'+x.n);p&&p.classList.add('has');let d=document.createElement('div');d.className='c';
+d.innerHTML='<span class="h"></span><div class="q"></div><div class="b"></div><div style="text-align:right"><button>编辑</button> <button>删除</button></div>';
+d.querySelector('.h').textContent='¶'+x.n+' · '+new Date(x.t).toLocaleString().slice(0,-3);d.querySelector('.q').textContent=x.q;d.querySelector('.b').textContent=x.c;d.querySelector('.h').onclick=()=>p.scrollIntoView({behavior:'smooth',block:'center'});
+let [e,r]=d.querySelectorAll('button');e.onclick=()=>open_(x.n,x.q,x);r.onclick=()=>{if(confirm('删除这条批注？')){A=A.filter(y=>y!==x);render();sync()}};sd.append(d)})}
+function open_(n,q,ex){$('fb').style.display='none';cur={n,q,ex};document.querySelectorAll('p.sel').forEach(p=>p.classList.remove('sel'));$('p'+n).classList.add('sel');
+$('eq').textContent='¶'+n+'：'+q;$('et').value=ex?ex.c:'';$('ed').style.display='block';$('et').focus()}
+function close_(){$('ed').style.display='none';document.querySelectorAll('p.sel').forEach(p=>p.classList.remove('sel'));cur=null}
+function selInfo(){let s=getSelection();if(!s.rangeCount||s.isCollapsed)return null;let q=s.toString().trim();if(!q)return null;let a=s.anchorNode;a=a.nodeType==1?a:a.parentElement;let p=a&&a.closest('main p');if(!p)return null;return{n:+p.dataset.n,q,r:s.getRangeAt(0).getBoundingClientRect()}}
+m.addEventListener('click',e=>{if($('ed').style.display=='block')return;if(selInfo())return;let p=e.target.closest('p');if(p)open_(+p.dataset.n,txt(p))});
+document.addEventListener('selectionchange',()=>{clearTimeout(window._t);window._t=setTimeout(()=>{let i=selInfo(),b=$('fb');if(!i){b.style.display='none';return}pend=i;b.style.display='block';
+let y=i.r.bottom+8;if(y>innerHeight-50)y=i.r.top-44;b.style.top=Math.max(50,y)+'px';b.style.left=Math.min(innerWidth-90,Math.max(8,i.r.left))+'px'},300)});
+$('fb').addEventListener('mousedown',e=>e.preventDefault());$('fb').onclick=()=>{if(pend){open_(pend.n,pend.q);getSelection().removeAllRanges()}};
+$('ec').onclick=close_;
+$('es').onclick=()=>{let c=$('et').value.trim();if(!cur)return;let now=new Date().toISOString();
+if(cur.ex){if(c){cur.ex.c=c;cur.ex.t=now}else A=A.filter(y=>y!==cur.ex)}else if(c)A.push({n:cur.n,q:cur.q,c,t:now});close_();render();sync()};
+$('et').onkeydown=e=>{if(e.key=='Enter'&&(e.ctrlKey||e.metaKey))$('es').click();if(e.key=='Escape')close_()};
+$('cp').onclick=copyAll;$('sub').onclick=()=>submit('批注');$('lk').onclick=()=>submit('锁定');$('rj').onclick=()=>submit('打回');diffs();$('meta').textContent=(P.status||'')+' · 指纹 '+P.fp;$('cbx').onblur=()=>$('cbx').style.display='none';
+$('xm').onclick=()=>dl(TITLE+'-批注.md','# '+TITLE+' 批注\n\n'+so().map(x=>'- ¶'+x.n+'　'+x.t+'\n  > '+x.q.replace(/\n/g,' ')+'\n\n  '+x.c.replace(/\n/g,'\n  ')).join('\n\n')+'\n','text/markdown');
+$('xj').onclick=()=>dl(TITLE+'-批注.json',JSON.stringify({title:TITLE,notes:so().map(x=>({段号:x.n,原句:x.q,批注:x.c,时间:x.t}))},null,2),'application/json');
+$('tg').onclick=()=>sd.classList.toggle('open');
+$('th').onclick=()=>{let r=document.documentElement,dk=r.dataset.theme?r.dataset.theme=='dark':matchMedia('(prefers-color-scheme:dark)').matches;r.dataset.theme=dk?'light':'dark';localStorage.setItem('rv-theme',r.dataset.theme)};
+load();
+</script></body></html>
