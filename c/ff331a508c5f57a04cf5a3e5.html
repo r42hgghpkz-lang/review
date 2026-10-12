@@ -22,6 +22,7 @@ aside{width:340px;border-left:1px solid var(--bd);height:calc(100vh - 45px);posi
 .dec .dec-opts{display:flex;flex-wrap:wrap;gap:8px 14px}
 .dec label{display:inline-flex;align-items:center;gap:4px;cursor:pointer;color:var(--fg);padding:2px 0}
 .dec input[type=radio]{accent-color:var(--ac);margin:0}
+.dec .dec-rec{font-size:12px;color:var(--fg);opacity:.8;margin:2px 0 6px}.dec .rec-tag{color:var(--ac);font-size:11px;margin-left:2px}.dec .dec-vote{margin-top:8px;font-size:12px;border-top:1px dotted var(--ac);padding-top:6px}.dec .dec-vote div{margin:2px 0}
 #decbar{max-width:760px;margin:10px auto 0;padding:0 20px;font-family:sans-serif;font-size:13px;color:var(--mu)}
 #decbar b{color:var(--ac);font-weight:600}
 #cbx{position:fixed;inset:20% 5% auto 5%;height:50%;z-index:20;display:none;width:90%;font:14px/1.5 sans-serif;background:var(--card);color:var(--fg);border:2px solid var(--ac);border-radius:8px;padding:8px}
@@ -35,7 +36,7 @@ aside{width:340px;border-left:1px solid var(--bd);height:calc(100vh - 45px);posi
 <div style="font-size:17px;margin-bottom:10px">请输入阅读密码</div><input id="gp" type="password" autocomplete="current-password" style="width:100%;font-size:16px;padding:8px;border:1px solid var(--bd);border-radius:6px;background:var(--bg);color:var(--fg)">
 <label style="display:block;margin:10px 0;font-size:14px"><input type="checkbox" id="gr"> 记住密码（仅本机）</label><button style="width:100%;padding:8px;background:var(--ac);color:#fff;border:0;border-radius:6px">打开</button><div id="gm" style="color:var(--ac);font-size:13px;margin-top:8px"></div></form></div>
 <script>
-const ENC="wJTGfmyIBZWf1IhHpYizw9jl3648SxGyCXlUKiF7ydDvaBHHeYCfk7ckZTluRGzDFiTJE3DeXkWqQ9HHet5UfLe6QRqTYjkNPwSjVFNzswD6Fhrt6cSqkW3dtJvDx3JS5v19z/rbNlMP2D6azM5LuYqlxcqM6aU58fJdsKnClWj8q/qRf2mMf5/ByjdmP7mSXTa22jFd1BmPw/Cm0sP8/kiW5hr4626egrUGbYkAlt63bozT+dU96BP22koDInI3GyQp/c3hxjOsQpYKgnaqNI1wfFINGpRt1jbnbx0cRmFifBtJaMzgbDb18OlsYfFiZL89QkeAdGeB3CIkHWtHr23aYt/1TshxKbCJ6p1UGmj1/HmK5caIFqErfCtXIzVRoDVHgu1Xca/c7/m80JKitRfZLrz9T7iaRNV9gsQzriVC+xL7JZJOJkA6eQj5d+96MpChAzwh70PGIVagt7K4wJrn7AvaaX74qCaEaK08MweWPH5K+0XB5CB3XyTgsU34sGEL2ApnPxdNTWMg5m77br9YHAKoRk/nDUYkQAdFVlfOa8Et8MPCPiBF8Fe/wcKiXE11K8PNxIBEGzhLu91ll/QEdoINppkrWAGCeEDdweZoP44zXO71A6vMXFnNymriNaRprdBoc6e5bwr4o1rNcUwOGS3kD5peulBhhy0rBFb7/Eg52o+ZIxavWYu+lLxzVXURbhMM50Utucn6XYtrxu/+V4wr6yWuD4/kICr9kTyVyDC5B49j2mK57oecjG0IcfeO0DzgdlN3S32zM1ywMSiFrFhOcA5GFNBFai9no82a80GOd7NnODpDRBSqJgPq7KmmclG56XTqGTybOo92NG4a+wf3gn/Yuj+K+8fzdksTaGT6gh+QXd0OgqXEEfLRnNZs5FzTs5VAA70ieLa99jEr0Cp57vHRnpY+t8Le1NcUUpWkNSiSnbz8aRINL6WVqkw807Y9qQIbmd3PoZ5icD6uQ1g7FtVX2I+lK2Hj4cqXsAX+L94LMuWnL3Ja9fdA6HlSzbUqzWTI0SSlfyq5EVEQY+gvoyxU85HZL1k7F9rbe0A4WFRtnDoD18C19tOddjYYRYbd+mLjIZZWmur/qSxEbU92CnvpUgA=",FID="ff331a508c5f57a04cf5a3e5";let PW=null,P=null;
+const ENC="RT4Rt6TGYCz5n2pdSAV7xSJWqELUa+4WJRVsvJzXNobic92sHQCleKZj+DUlwI3lr75vC6r8FtHdNHPp+j4CXRmdhJZ6pMcuYYvVEN3ttORMIgVhLW+HK5mE3kWWJmoJmOr2AXPa/Bfuw4ZABub52Ct1MFhEa1AQnjis9Y9gIKtPNdAKgjEQLtBdUD9ySr0TGGusHeIc+l4OYS3cnahOCgBiMYZ7eRNxrFXtABMY77ZEuCra42kT1rPVrSockEL9OOabiRpdI54UFf/6ZHAdIDhI2tB95F+YNAynU3eVPsggcEczfOcp1XXzIRSE11QX5p5RY+wYcUm/w5aW1DnjNqxDFWKLo6dnauJBKSxR90Ka1Os3X0lJtZAwdANn583IW/8OYzlZfFSOHZ3grJAz20XjQ0xeSHUvC9X0+z4Z8QFqkz/G8qdMyrYSwY3P+kiKgTQ/Fhk19fBa6AN+gG/jaeVGrVh8K66zS9CF//61C+9ZvWfDKmOO3snR0gMsVklpND8FNyGQzx0R285Q+Ld6P5jcBhVNrn6F32fs0umn8V5fSDmcXth/F1owJhhlupNfpsIxIkdFWhTrWWAYfnHbMc+oxkEJzXp5JEg2mIasI6qwc+0ZpKS3HkJmRSeKU6xgbvbcptnyn6cwBmr3YLYFKGYITzcw0gdQvX/BqiC/XH3HDYvAbzSubbUud+NckNl0nr2dYNqeZ94vjj07EIUoiYcYnNe85LoBr7hFP1UiRQq+XN/9tFylozFdg9a0NL1fIAneHeqEQm0xUOAe5LLVT4i9hLnSq3phy6dGhDqR+Qs00llXcsBEwUuCDqwGyp744m7Jk2QJU0feq9fCnM1R4MvXX2bM5y5wFd1h4Yfs0Kwad5acV1iy9Hk1leLzbbDO0oz2dj8/JK4fegZu4XPl9Zmc20XQgYbb8Uh1bpAWKX+pqbWh+urB2D84bQogugPD1SNbxeOkeJGsOqlIcguVkjhZcG0/kDBs7LuHT/ZeTEPtQMNSWdaxyWUQkLRUH3VpCRYwUNT5GnGyV87RkK5pXD6ViUKE147hCwk8lvXAgz027dxGlO7G/vXxxz8el2OCxIGAsnuZ89IRW7JE/GILCxGCSt/gfWWfHR8=",FID="ff331a508c5f57a04cf5a3e5";let PW=null,P=null;
 const b2u=b=>Uint8Array.from(atob(b),c=>c.charCodeAt(0)),u2b=u=>{let s='';for(let i=0;i<u.length;i+=8192)s+=String.fromCharCode.apply(null,u.subarray(i,i+8192));return btoa(s)};
 async function dk(pw,salt){let k=await crypto.subtle.importKey('raw',new TextEncoder().encode(pw),'PBKDF2',false,['deriveKey']);return crypto.subtle.deriveKey({name:'PBKDF2',salt,iterations:600000,hash:'SHA-256'},k,{name:'AES-GCM',length:256},false,['encrypt','decrypt'])}
 async function decText(pw,b){let r=b2u(b);return new TextDecoder().decode(await crypto.subtle.decrypt({name:'AES-GCM',iv:r.slice(16,28)},await dk(pw,r.slice(0,16)),r.slice(28)))}
@@ -55,13 +56,15 @@ function choiceOf(d){return (d.id in DEC)?DEC[d.id]:(d.default||(d.options&&d.op
 function pendingDec(){return DECS.filter(d=>!(d.id in DEC)).length}
 function updDecBanner(){let bar=$('decbar');if(!DECS.length){bar.innerHTML='';return}let p=pendingDec();bar.innerHTML=p?'<b>待决策 '+p+' 项</b> · 共 '+DECS.length+' 项，勾选后随锁定/打回一并提交':'决策 '+DECS.length+' 项已选 · 随锁定/打回一并提交'}
 function decEl(d){let box=document.createElement('div');box.className='dec';box.dataset.id=d.id;
-let lab=document.createElement('div');lab.className='dec-lab';lab.textContent='待决策 · '+d.label;
+let lab=document.createElement('div');lab.className='dec-lab';lab.textContent=(d.major?'重大决策 · ':'待决策 · ')+d.label;
+let rec=document.createElement('div');rec.className='dec-rec';rec.textContent='推荐：'+(d.default||'')+(d.reason?'｜理由：'+d.reason:'');
 let opts=document.createElement('div');opts.className='dec-opts';
 (d.options||[]).forEach(o=>{let lb=document.createElement('label');let inp=document.createElement('input');inp.type='radio';inp.name='dec-'+d.id;inp.value=o;
 let cur=choiceOf(d);if(cur===o)inp.checked=true;
 inp.onchange=inp.onclick=()=>{DEC[d.id]=o;saveDec();updDecBanner()};
-lb.append(inp,document.createTextNode(' '+o));opts.append(lb)});
-box.append(lab,opts);box.addEventListener('click',e=>e.stopPropagation());box.addEventListener('mousedown',e=>e.stopPropagation());return box}
+if(o===d.default){let tg=document.createElement('span');tg.className='rec-tag';tg.textContent='（推荐）';lb.append(inp,document.createTextNode(' '+o),tg)}else lb.append(inp,document.createTextNode(' '+o));opts.append(lb)});
+box.append(lab,rec,opts);
+if(d.major||d.votes){let vp=document.createElement('div');vp.className='dec-vote';let vs=d.votes||[];let hd=document.createElement('div');hd.textContent='席位投票（'+vs.length+'席）· 计票：'+(Object.entries(d.tally||{}).map(([k,n])=>k+' '+n+'票').join('，')||'暂无');vp.append(hd);vs.forEach(v=>{let r=document.createElement('div');r.textContent=v.seat+'：'+v.choice+' — '+v.reason;vp.append(r)});let ft=document.createElement('div');ft.textContent='作者拍板为准';vp.append(ft);box.append(vp)}box.addEventListener('click',e=>e.stopPropagation());box.addEventListener('mousedown',e=>e.stopPropagation());return box}
 loadDec();
 DECS.filter(d=>d.after===0).forEach(d=>m.append(decEl(d)));
 D.forEach((t,i)=>{let p=document.createElement('p');p.id='p'+(i+1);p.dataset.n=i+1;p.innerHTML='<span class="n">'+(i+1)+'</span>';p.append(document.createTextNode(t));m.append(p);
