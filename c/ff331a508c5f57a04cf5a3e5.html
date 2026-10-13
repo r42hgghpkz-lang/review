@@ -58,7 +58,7 @@ p.authd{box-shadow:inset 3px 0 0 #3a9a6a}p .aut{display:inline-block;margin-left
 <div style="font-size:17px;margin-bottom:10px">请输入阅读密码</div><input id="gp" type="password" autocomplete="current-password" style="width:100%;font-size:16px;padding:8px;border:1px solid var(--bd);border-radius:6px;background:var(--bg);color:var(--fg)">
 <label style="display:block;margin:10px 0;font-size:14px"><input type="checkbox" id="gr"> 记住密码（仅本机）</label><button style="width:100%;padding:8px;background:var(--ac);color:#fff;border:0;border-radius:6px">打开</button><div id="gm" style="color:var(--ac);font-size:13px;margin-top:8px"></div></form></div>
 <script>
-const ENC="OkVpHte0Ni+Sh3Pet9JgwFS8Zf0IrDelxqhRa7H05ZeNQEISy7UvhZ8fmgv1/2TMFLKF7VyUfY8bg9lAGLdGp9KWiESy1SXx3RS+nQm2QojLuNi8JvMNehLvcTwCdaG57Ni0YTiF+OeWYJoQGzwYPPy9dqOmi0hISiIWdAOqR/D3SHB8Q2xjHtI4XJJY4ApvCbE1/L6TqAUUsYRvhnmRhm4XhAMwQ5JonPJjDxV26P8qK22WauaRM54uI2r47YquBw0MeaIUSKLI1gBM1frPrxzseSXO/pN65zUclk9AmwxZMZ16dlnW0JdpGf6eFDQDXdIQE9InFIhzI/puSqdbKRrjfIL5szXgLkSASIt8J1AFBENKi3tcxzWS//9a+YLdLCjQxqeFTcTrtaPdB0V1TyBhN+RH+OYAF6hYApuM3BpM0MVG2YE3GIUSjZiBthIvfbrjj/WVWo5RX0Gn+0+Oygg22IGo2E29dY7Csdhvnk8SDSRAHJvsuTrEq7OGDeegFTfZU2ox3eQpQXFwlNNNr0UfGW48oatxMzGM0Jx/9lLSLVLNluNoVwBr0bEbwmCXVV2gXrq1uQvLwzwfF5hBb3qjd56N0D9Nvch0P37aqlHgywNCuJ0Zt61YONTKHpoh7F4Ar+lSYn5/v0LiZArbs9NgJT6y9ao3JciyjvEeJ3u9SsAjn+z8FgiG/nYqG3W6XZlvgYvS6+88J1c2pHwN0FqnA/Dcu8htBFtBAvKy0RrGrgQ/RRbg2662zq1z3otye4Y0H0mBgZb/ptHyMLO/JXYEQW9BIj4A45vO1T/u0856ED3h7Cd/AEMHksfhDE2kZ7mWqhJWcKzznXw5YJhdaZY3BOStH6oRVNmx1KZY7a6HsLrIDXUesa9scB6r2z+U3ZTPJegEm+eCWqPhRXOl4EOHjIBYIkBMZoAx3SNYyuQpm1c7QTNFuFYKee6NlJnQ6IouFfWzhN+192ZRFvYFyzDczsy4+SKR+klXzjzT4/pYtGeS3JSrIlZQzkWMdbPOzlIUc+wqE4L+/1uSVvx1sYHaKKfoD28VJIk+X2LJMnT7lzbN+o96HcNFqpQygwF1vnrKQTtB0y/TGnzJLUyiROvra/Mi/N7N6JGLNssiW3n7x7yVFW4woFG9E3kJEvFQBe0xApPbiwPksRF4j+C10dq7d7bn+Lj165JYkUkYiJGOp/KNsDQT025UyWlhJVs4i4guhtuw/bpYekcN/vbaQumr9PbEXtDdSapdOLEu4Fr9Ev69Vazoq6MI8HzjxPdeurUXJPJKpf1P6aEtsoctyumhN04yfRoO+7NrysSIbHn4cLE=",FID="ff331a508c5f57a04cf5a3e5";let PW=null,P=null;
+const ENC="cd4XdMdz+WJOrjkw/8Su55/frSIrEm/mqKUcEaUcMthjjUh6DrCwgVTiijfHaDvPJjaDECsKoX+b4LJxfSLunb+FH7TQReyP3SiZX4nBxJHtAaN1cqfBbcWocEZoxrdzhVH1KZMMYUct9wdaiPxtuhmjv0OPwK4gLDri6nApr+XL/WkfbJ1XbK1Yg6KQXqGIyDVmCcJ5knlzORVEDpLnoZCsdDs3+Ek6yPppOpXU/i0JupQuvnlDnDjpO69rY7zAEgXz+5oXq9I/2EhyHV9+hFv9t/pTz22f+G2S5oeZqS15G2tuVR9X5ybkerBZcDP5KMfBJoUY5c1HpYRq8vZ+as88VIZaJd7gVDjn4/eHenLWlC2HPddPDmnCeiL+Sgiv7QdGp/IsFg2sD2IilDPt+rsPIaOZYdkbpQSSKp5j+VmtoEcOZoRH5DNVknShxxyMSAdpA9L4H+yC3r+bxHEKI0xvd1azyc5338inW7/CmbE5a+p6IKJGgr/5O7VbPfb9c90o7ikdYWHd7n8rfi+weyyd1aJGqauMugTBONfSMGsqsYx+Bqnn71mwqPMWukUwQ4FcXRDoeZmSnvkqaFpaAGfRq7T9VNFkVc1y/719ccmamjcateU8OQpes45eUT0eKjG/MzYgwc9H+XWaIHE85JapdN9V1SXUcxZ92YYKyJpA8Y7xOKvMiAhoStVnq5PmSObq44QjYvUqxtA/B4vpkR6EWkUgMs4s0f6Of8+Q7L/kr+dufZauNd63kuv5CZHqsS3yz5Yc0jSR0dFtIJu6Rn/5Ookq7PXd/WbfLOd77q7K6AnhSmD44YiwdbdKPaqRSbbbPzDxt/k7zwiMFoHmlQKsEnOvmgYWGGRKkTdlAgqSbnEkHSXKGw+kADqSYa8GdiowoHgTjlOTqk56st6RjTQ7gDMCZw7GDMT9wEri3OeDRUXhOsMIaQKnMU+mo018Zrl0WGesDPd7EG0oQRTP1iuyzz6dmvylMobm0pjUfrLA5RqzEfxhdtiCvDqV9tePu92Vb1mxO1hr1gcax8dyDKEYJWjLty42/ROaGA/55mwpA97keYhU3D/jwHaCEEYG22ugs4J6vfG2MF89+9fOVQRw9I0ZpMC6z2n2p3pgBxjO7yX3ao7c+UlXaI3k/4CAfnKQRuak2i62N5yx6mkZKmzGW6u4J7ehFHdsTvoOXrrwMMTkNWZicMn5dXX9cIRiKh5M8xxLhQwDLTyen1b6j/4xeBUlOa5bB1kXODhjyKR6k31Ycy3Qtn0x1HNI9JBdx9dgnbe/5WHQw4KUNThY6rSytK8qMv/xhLjOaZSXI2gpr6s=",FID="ff331a508c5f57a04cf5a3e5";let PW=null,P=null;
 const b2u=b=>Uint8Array.from(atob(b),c=>c.charCodeAt(0)),u2b=u=>{let s='';for(let i=0;i<u.length;i+=8192)s+=String.fromCharCode.apply(null,u.subarray(i,i+8192));return btoa(s)};
 async function dk(pw,salt){let k=await crypto.subtle.importKey('raw',new TextEncoder().encode(pw),'PBKDF2',false,['deriveKey']);return crypto.subtle.deriveKey({name:'PBKDF2',salt,iterations:600000,hash:'SHA-256'},k,{name:'AES-GCM',length:256},false,['encrypt','decrypt'])}
 async function decText(pw,b){let r=b2u(b);return new TextDecoder().decode(await crypto.subtle.decrypt({name:'AES-GCM',iv:r.slice(16,28)},await dk(pw,r.slice(0,16)),r.slice(28)))}
@@ -151,7 +151,7 @@ boxCopy(t)}
 function dl(name,text,type){let blob=new Blob([text],{type:type+';charset=utf-8'}),u=URL.createObjectURL(blob),a=document.createElement('a');a.href=u;a.download=name;a.rel='noopener';a.style.display='none';document.body.append(a);a.click();setTimeout(()=>{a.remove();URL.revokeObjectURL(u)},4000)}
 async function submit(action){let _ae0=(typeof AE!=='undefined')?Object.keys(AE).length:0;if(action=='打回'&&!A.length&&!_ae0){alert('打回请先写批注（点段落或选中文字）。');return}
 if(action=='作者改动'&&!_ae0){st.textContent='没有待提交的改动';return}
-if(action=='批注'&&!A.length){st.textContent='还没有批注';return}
+if(action=='批注'&&!A.length&&!_ae0){st.textContent='还没有批注或作者改动';return}
 if(action=='微调')action='微调锁定';
 let aeNs=(typeof AE!=='undefined')?Object.keys(AE).map(Number).sort((a,b)=>a-b):[];
 if(action=='锁定'&&aeNs.length)action='微调锁定';
@@ -163,12 +163,12 @@ let decisions=DECS.map(d=>{let c=choiceOf(d),a=apOf(d,c),k=((d.applies||{})[c]||
 if((action=='锁定'||action=='微调锁定'||action=='打回')&&DECS.length&&pendingDec()){if(!confirm('还有 '+pendingDec()+' 项待确认（将按已选或默认项提交）。仍要'+(action=='打回'?'打回':'锁定')+'？'))return}
 let payload={v:1,action,book:BOOK,ch:CH,fid:FID,fp:P.fp,time:new Date().toISOString(),notes:so().map(x=>({n:x.n,q:x.q,c:x.c,t:x.t})),decisions};if(action=='打回'&&aeNs.length){payload.sha=P.sha||'';payload.edits=aeNs.map(n=>({book:BOOK,ch:CH,n,old:D[n-1],new:AE[n],sha:P.sha||''}))}if(action=='微调锁定'){payload.sha=P.sha||'';payload.edits=aeNs.map(n=>({book:BOOK,ch:CH,n,old:D[n-1],new:AE[n],sha:P.sha||''}))}if(aeNs.length&&!payload.edits&&!action.startsWith('特批')){payload.sha=P.sha||'';payload.edits=aeNs.map(n=>({book:BOOK,ch:CH,n,old:D[n-1],new:AE[n],sha:P.sha||''}))}if(action=='作者改动'){payload.notes=[];payload.decisions=[];payload.migrated=MIG.length}if(action.startsWith('特批')){payload.waiver=WVSEL;payload.notes=[];payload.decisions=[]}
 
-if(aeNs.length&&!action.startsWith('特批')){AESENT=Object.assign({},AE);try{localStorage.setItem(EK+':sent',JSON.stringify({t:Date.now(),e:AESENT}))}catch(e){}}
+let submittedEdits=aeNs.length&&!action.startsWith('特批')?Object.assign({},AE):null;
 let title=(action=='批注'?'批注+':action=='微调锁定'?'微调锁定+':action=='作者改动'?'作者改动+':'审阅+')+Math.random().toString(36).slice(2,8),body=await encText(JSON.stringify(payload)),u=REPO+'?title='+encodeURIComponent(title)+'&body='+encodeURIComponent(body);
-if(u.length<=7000){window.open(u,'_blank')||(location.href=u);st.textContent=action=='微调锁定'?'已打开 GitHub，点 Submit 提交微调并锁定':'已打开 GitHub，点 Submit 提交';aeSync();return}
+if(u.length<=7000){window.open(u,'_blank')||(location.href=u);markEditsSent(submittedEdits);st.textContent=action=='微调锁定'?'已打开 GitHub，点 Submit 提交微调并锁定':'已打开 GitHub，点 Submit 提交';aeSync();return}
 let w=window.open(REPO+'?title='+encodeURIComponent(title),'_blank'),ok=false;
 try{if(navigator.clipboard&&window.isSecureContext){await navigator.clipboard.writeText(body);ok=true}}catch(e){}
-if(!ok)ok=legacy(body);if(ok){st.textContent='已复制，粘贴即可';alert('已复制（已加密），粘贴即可。\n在打开的 GitHub 页面正文框里粘贴，再点 Submit。')}else boxCopy(body);if(!w)location.href=REPO+'?title='+encodeURIComponent(title);aeSync()}
+if(!ok)ok=legacy(body);if(ok){st.textContent='已复制，粘贴即可';alert('已复制（已加密），粘贴即可。\n在打开的 GitHub 页面正文框里粘贴，再点 Submit。')}else boxCopy(body);if(!w)location.href=REPO+'?title='+encodeURIComponent(title);if(w||ok)markEditsSent(submittedEdits);aeSync()}
 function diffs(){let d=P.diffs||[];if(!d.length)return;let h=document.createElement('details');let sm=document.createElement('summary');sm.textContent='上一版改了 '+d.length+' 处（'+(P.diffFrom||'')+'）— 正文已标改，点开看对照';h.append(sm);
 d.forEach(x=>{let r=document.createElement('div');r.className='pr';let b=document.createElement('div'),a=document.createElement('div');b.className='b4';a.className='af';b.textContent=x.b||'（无）';a.textContent=x.a||'（删去）';
 let m=document.createElement('div');m.className='mt';m.style.gridColumn='1/-1';let ns=x.ns&&x.ns.length?x.ns:(x.n?[x.n]:[]);m.textContent=ns.length?('改后 ¶'+ns.join('、')):(x.n?('改后 ¶'+x.n):'（仅删）');
@@ -198,24 +198,25 @@ $('tg').onclick=()=>sd.classList.toggle('open');
 $('th').onclick=()=>{let r=document.documentElement,dk=r.dataset.theme?r.dataset.theme=='dark':matchMedia('(prefers-color-scheme:dark)').matches;r.dataset.theme=dk?'light':'dark';localStorage.setItem('rv-theme',r.dataset.theme)};
 /* 作者手动微调（2026-10-13；16:03 一体）：每段「编辑」→ 本机暂存 → 「提交微调并锁定」加密进 issue（action=微调锁定）；落稿 apply_author_edits → apply_locks */
 const EK=K+':edits';let AE={};try{AE=JSON.parse(localStorage.getItem(EK)||'{}')||{}}catch(e){AE={}}let aeN=0;
-function aeSync(){try{localStorage.setItem(EK,JSON.stringify(AE))}catch(e){}let k=Object.keys(AE).length,b=$('aes'),lk=$('lk');b.style.display='none';
+function markEditsSent(edits){if(!edits)return;AESENT=Object.assign({},AESENT,edits);try{localStorage.setItem(EK+':sent',JSON.stringify({t:Date.now(),e:AESENT}))}catch(e){st.textContent='提交已打开；本机未能记录提交状态，请保留本页草稿'}}
+function aeSync(){try{localStorage.setItem(EK,JSON.stringify(AE))}catch(e){st.textContent='本机存储失败：请复制改后文字，释放浏览器空间后重试';return false}let k=Object.keys(AE).length,b=$('aes'),lk=$('lk');b.style.display='none';
 if(k){lk.textContent='提交微调并锁定（'+k+' 段）';lk.title='一次提交：落改 '+k+' 段并锁定'}else{lk.textContent='通过锁定';lk.title=''}
 document.querySelectorAll('main p[data-n]').forEach(p=>{let n=p.dataset.n,on=n in AE,sent=on&&AESENT[n]==AE[n];p.classList.toggle('aedit',on);if(!on)p.classList.remove('aeorig');p.title='';
 let x=p.querySelector('.aetx'),bd=p.querySelector('.aeb');if(on){if(!x){x=document.createElement('span');x.className='aetx';let ref=p.querySelector('.tx-o,.tx-n');(ref||p.lastChild).after(x)}x.textContent=AE[n];
 if(!bd){bd=document.createElement('span');bd.className='aeb';bd.onclick=e=>{e.stopPropagation();p.classList.toggle('aeorig');aeBadge(p)};x.after(bd)}aeBadge(p,sent)}});
-let u=aeUnsent(),c=$('aecnt');c.style.display=k?'inline-block':'none';c.textContent=u?'未提交改动 '+u+' 处':(k?'改动 '+k+' 处已提交·待落正文':'');c.title=u?'保存只存在本机；点「提交微调并锁定」／「打回」／「提交批注」一次带上':''}
+let u=aeUnsent(),c=$('aecnt');c.style.display=k?'inline-block':'none';c.textContent=u?'未提交改动 '+u+' 处':(k?'改动 '+k+' 处已提交·待落正文':'');c.title=u?'保存只存在本机；点「提交微调并锁定」／「打回」／「提交批注」一次带上':'';return true}
 function aeUnsent(){return Object.keys(AE).filter(n=>AESENT[n]!=AE[n]).length}
 function aeBadge(p,sent){let bd=p.querySelector('.aeb');if(!bd)return;let n=p.dataset.n;if(sent==null)sent=AESENT[n]==AE[n];bd.textContent=(sent?'你改的·已提交':'你改的·未提交')+(p.classList.contains('aeorig')?' · 看改后':' · 看原文');bd.title='点击切换原文／改后'}
 window.addEventListener('beforeunload',e=>{if(aeUnsent()){e.preventDefault();e.returnValue='还有未提交的改动';return e.returnValue}});
 function aeOpen(n){aeN=n;$('aen').textContent=n;$('aeo').textContent='原文：'+D[n-1];$('aet').value=AE[n]!=null?AE[n]:D[n-1];$('aed').style.display='block';$('aet').focus()}
 document.querySelectorAll('main p[data-n]').forEach(p=>{let b=document.createElement('button');b.className='eb';b.textContent='编辑';b.title='作者手动微调这一段';b.onclick=e=>{e.stopPropagation();e.preventDefault();aeOpen(+p.dataset.n)};p.prepend(b)});
 $('aec').onclick=()=>{$('aed').style.display='none'};
-$('aer').onclick=()=>{delete AE[aeN];$('aed').style.display='none';aeSync()};
+$('aer').onclick=()=>{let prior=AE[aeN];delete AE[aeN];if(!aeSync()){AE[aeN]=prior;return}$('aed').style.display='none'};
 $('aeok').onclick=()=>{let v=$('aet').value.replace(/\r/g,'');if(/\n/.test(v)){if(!confirm('改后文含换行，会被合并成一段（换行删掉）。继续？'))return;v=v.replace(/\n+/g,'')}v=v.trim();
-if(!v){alert('不能清空整段。要删段请写批注。');return}if(v==D[aeN-1])delete AE[aeN];else AE[aeN]=v;$('aed').style.display='none';aeSync();st.textContent='✓ 已存本机草稿（未提交）'};
+if(!v){alert('不能清空整段。要删段请写批注。');return}let prior=AE[aeN];if(v==D[aeN-1])delete AE[aeN];else AE[aeN]=v;if(!aeSync()){if(prior==null)delete AE[aeN];else AE[aeN]=prior;return}$('aed').style.display='none';st.textContent='✓ 已存本机草稿（未提交）'};
 $('aes').onclick=()=>submit('微调锁定');
 /* 20:24 D-20261013-2024-1：保存只存本机草稿，不再一保存即提交；正文显示改后。 */
-/* 16:52 作者：「我改动的必须生效」——①旧指纹未交改动迁移（绝不丢）②已生效作者改动标「你改的·已生效」③改动一保存即加密提交 */
+/* 旧指纹草稿迁移、已生效标记；只有页眉提交动作才加密发出改动。 */
 let AESENT={};try{AESENT=(JSON.parse(localStorage.getItem(EK+':sent')||'{}')||{}).e||{}}catch(e){}
 let MIG=[],CF=[];
 function sim(a,b){if(!a||!b)return 0;let g=s=>{let m={};for(let i=0;i<s.length-1;i++){let k=s.substr(i,2);m[k]=(m[k]||0)+1}return m},x=g(a),y=g(b),c=0,t=0;for(let k in x){t+=x[k];if(y[k])c+=Math.min(x[k],y[k])}for(let k in y)t+=y[k];return t?2*c/t:0}
@@ -238,9 +239,12 @@ let cfs=CF;cfs.forEach((c,j)=>{let d=document.createElement('div');d.className='
 d.querySelectorAll('input').forEach(r=>r.onchange=()=>{if(r.value=='t'){delete AE[c.n]}else AE[c.n]=c.mine;aeSync()});if(c.n&&AE[c.n]==null)d.querySelector('input[value=t]').checked=true;b.append(d)});
 $('migsub').onclick=()=>submit('作者改动')}
 function markAuthored(){(P.authored||[]).forEach(a=>{let p=$('p'+a.n);if(!p||p.querySelector('.aut'))return;p.classList.add('authd');let t=document.createElement('span');t.className='aut';t.textContent='你改的·已生效';t.title='你改的这段已落正文并锁定（写手／改单不得改动）'+(a.old?'\n原：'+a.old:'');p.append(t)})}
+function showDraftRecovery(){let pre='rv-arch:rv:'+FID+':',items=[];for(let i=0;i<localStorage.length;i++){let key=localStorage.key(i);if(!key||!key.startsWith(pre)||!key.includes(':edits:'))continue;try{let edits=JSON.parse(localStorage.getItem(key)||'{}');if(Object.keys(edits).length)items.push({key,edits})}catch(e){}}
+let box=$('draft-recovery');if(!items.length)return;box.style.display='block';let details=document.createElement('details'),summary=document.createElement('summary');summary.textContent='旧版草稿存档 '+items.length+' 份（点开找回／复制）';details.append(summary);
+items.forEach(({key,edits})=>{let d=document.createElement('div');d.className='entry';let fp=key.slice(pre.length).split(':edits:')[0];let b=document.createElement('b');b.textContent='旧指纹 '+fp+' · '+Object.keys(edits).length+' 段';d.append(b);Object.keys(edits).sort((a,b)=>+a-+b).forEach(n=>{let row=document.createElement('div');row.textContent='¶'+n+' '+edits[n];d.append(row)});let btn=document.createElement('button');btn.type='button';btn.textContent='下载这份草稿 JSON';btn.onclick=()=>dl('作者草稿-'+FID+'-'+fp+'.json',JSON.stringify({fid:FID,fp,edits},null,2),'application/json');d.append(btn);details.append(d)});box.append(details)}
 migrate();Object.keys(AE).forEach(n=>{if(AE[n]==D[n-1])delete AE[n]});
-const _aeS=aeSync;aeSync=function(){_aeS();migBar()};
+const _aeS=aeSync;aeSync=function(){let ok=_aeS();if(ok)migBar();return ok};
 markAuthored();
-aeSync();
+showDraftRecovery();aeSync();
 load();
 </script></body></html>
