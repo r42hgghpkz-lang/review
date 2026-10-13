@@ -52,20 +52,24 @@ p.authd{box-shadow:inset 3px 0 0 #3a9a6a}p .aut{display:inline-block;margin-left
 @media(prefers-color-scheme:dark){:root:not([data-theme=light]) p .chg-badge,:root:not([data-theme=light]) p .aut{background:#29332e;color:#d5ded7;border:1px solid #586b5f}:root:not([data-theme=light]) p.authd{box-shadow:inset 3px 0 0 #647a70}:root:not([data-theme=light]) #chgbar b{color:#c8d5cd}:root:not([data-theme=light]) del.dd{background:#352b2b;color:#decac7}:root:not([data-theme=light]) ins.di{background:#29332d;color:#cfdbd0}}
 @media(prefers-color-scheme:dark){:root:not([data-theme=light]) .delp{background:#352b2b;color:#decac7;border-color:#745b59}:root:not([data-theme=light]) .oldbox{color:#c9c7c2}:root:not([data-theme=light]) p.aeorig .tx-o,:root:not([data-theme=light]) p.aeorig .tx-n{color:#c9c7c2}}
 #draft-recovery{display:none;margin:10px 0;padding:8px 12px;border:1px solid var(--bd);border-radius:8px;background:var(--card);font:13px/1.6 sans-serif}#draft-recovery .entry{border-top:1px solid var(--bd);padding:6px 0;white-space:pre-wrap;overflow-wrap:anywhere}
+/* D-20261013-2305-books：精校面板沿用深色变量；采纳仅作柔和标记。 */
+#plbar{display:none;max-width:900px;margin:14px auto;padding:12px 20px;font:14px/1.7 sans-serif;background:var(--card);border:1px solid var(--bd);border-radius:8px;overflow-wrap:anywhere}#plbar.show{display:block}#plbar .pl-actions,#plbar .pl-picks{display:flex;gap:8px 14px;flex-wrap:wrap;align-items:center}#plbar .pl-row{border-top:1px solid var(--bd);padding:10px 0}#plbar .pl-text{display:grid;grid-template-columns:1fr 1fr;gap:12px;white-space:pre-wrap}#plbar .pl-why,#plstatus{color:var(--mu)}#plbar input{accent-color:var(--ac)}p.placcept{background:var(--chg);box-shadow:inset 2px 0 0 var(--chg-bd)}@media(max-width:600px){#plbar{margin:10px 8px;padding:10px 12px}#plbar .pl-text{grid-template-columns:1fr}}
 </style></head><body><header><a href="../index.html" style="text-decoration:none;color:var(--mu)">← 目录</a><b id="hdt">审阅</b><span id="meta"></span><span id="st"></span><span id="aecnt"></span><button id="lk" class="big" style="background:#2e8b57;border-color:#2e8b57">通过锁定</button><button id="rj" class="big">打回</button><button id="sub">提交批注</button><button id="cp">复制全部批注</button><button id="tx">复制正文</button><button id="aes" style="display:none;background:#2f6fd0;color:#fff;border-color:#2f6fd0">提交微调</button><button id="tg">批注</button><button id="xm">MD</button><button id="xj">JSON</button><button id="th" title="浅色/深色">◐</button></header>
-<div id="chgbar"></div><div id="df"></div><div id="draft-recovery"></div><div id="decbar"></div><div class="wrap"><main id="m"></main><aside id="sd"></aside></div>
+<div id="chgbar"></div><div id="df"></div><div id="draft-recovery"></div><div id="decbar"></div><div id="plbar"></div><div class="wrap"><main id="m"></main><aside id="sd"></aside></div>
 <div id="aed"><b>作者微调 ¶<span id="aen"></span></b><div class="q" id="aeo"></div><textarea id="aet"></textarea><div style="font-size:12px;color:var(--mu)">只改这一段；不能换行、不能清空。改完点「保存」只存在本机草稿（不提交、不跳转），正文直接显示改后文字；可连改多段。全部改完后点「提交微调并锁定」／「打回」／「提交批注」，所有未提交改动一次带上。</div><div style="text-align:right;margin-top:6px"><button id="aer">恢复原文</button> <button id="aec">取消</button> <button id="aeok" style="background:#2f6fd0;color:#fff;border-color:#2f6fd0">保存</button></div></div><button id="fb">批注</button><textarea id="cbx" readonly></textarea>
 <div id="ed"><div class="q" id="eq"></div><textarea id="et" placeholder="写批注…（Ctrl+Enter 保存）"></textarea><div style="text-align:right;margin-top:6px"><button id="ec">取消</button> <button id="es" style="background:var(--ac);color:#fff;border-color:var(--ac)">保存</button></div></div>
 <div id="gate" style="position:fixed;inset:0;z-index:50;background:var(--bg);display:flex;align-items:center;justify-content:center;font-family:sans-serif"><form id="gf" style="width:min(340px,90vw);background:var(--card);border:1px solid var(--bd);border-radius:12px;padding:20px">
 <div style="font-size:17px;margin-bottom:10px">请输入阅读密码</div><input id="gp" type="password" autocomplete="current-password" style="width:100%;font-size:16px;padding:8px;border:1px solid var(--bd);border-radius:6px;background:var(--bg);color:var(--fg)">
 <label style="display:block;margin:10px 0;font-size:14px"><input type="checkbox" id="gr"> 记住密码（仅本机）</label><button style="width:100%;padding:8px;background:var(--ac);color:#fff;border:0;border-radius:6px">打开</button><div id="gm" style="color:var(--ac);font-size:13px;margin-top:8px"></div></form></div>
 <script>
-const ENC="KqwFts+RnHDrMEgoSUHXbZ0VWT8XkszcCFklQTfh7BkPtQRcMPfNdz6QRhM0tBaIM0PaWlgFtS9xUHzgS1RuJjdarFeKhuctQ6yt6eh2KVchq24Zsmo+/DokP983GzURjRgR02Ui3FaLAoyIsTPj0xCq40EGWfAloBBx1u+DGyWa96Igz60Mn4CqJFRDFA2xX7cs8SiL9gEWzMKJjtccQs2PzRkyv2h4313ahtsWNv/wEWuiTJ2+HNQVfgJQZ1XGgGF3/BNCA5xEJibUisyGPGZZu0u7S7n+DZv6A4HRFLfy6h65JYsUzYM7fMEurtRkfiG1Jm4Xf4kRi32fxN6caWYq1aLcq/3Nx+Fn8u4gAkFpq+VfACTkbUDl9IkfpNwvDSPgYX0RlaKyJoyMV3JJ3dLfEO08pUNBcZK1dvyQAtUjL6+6WX+rm7QUOrpk/fbgpvq/4C343imbP+VgsPy4/1lfQhzXZ/4TEI4htCz72Igf/65fySuTgoId9HERHLNEeKGz1sJRuJkeylhNKVmlKk31+Fq6tEXeuBC/BckNrP5yjKQBQgx4tSAPJX5MkJQPNhyyNsN2GWS5lSShtUtR8syM/QwecNgM2u6Y+dA8Al3rnLJIoNxXqrInBlWeBer2LKE0rG6roC4CAj6HiY4EVXNizsNgmBgSCC6STlcFSvdUtpDHGuLdN6poHF7qBXkrTVrtThv6kruD4BblrULDjztjpmBsuZvNjO/dAiSZo9lxBk5hvY0BhYpHo1MNHpXODeogKtPI4QS/dxK+EUu48gV1R4mbrLYgHs/5yo3Z9/3/dK2B5OlRTgx/SzqkmllnOgMunbPXRBub18t1ecV1UAYByu4h8pvGsTtGKQSwbZ8S1LQAYOOABEFqu7WN2LISD3sm1uVD5hTggBxG+eVjb6CgknPfopDgtyY23oTIdUlT1ZrHgjCExIwC9Jcfl5krqiLDtTvzxME2KEO274GXwv3Rotph/uOguJH6hDUEfFwfZ/nTg6hoO+5ltH5FEQbMlCS3UYe6mJCS/dBXFTcn5B0LOpAuQBRHMIWNIFgzAT5GozyDW/TgwrTAhXk+tDQH3P/Hy6iCFpN8pN1x/qHjnkETLixL9vL73aTxFQGjyh7Yb35F6LgdkP3Qn++QJzyoD40aTc3ioj1E5I71LBm4EK1GRa4q9eqUs6461wN5pHzE0qcEIooTk0/4fmkDLHbN9u8zYMKm7iwRjGTcvVEuGYtvyHUlM924XcVoUWrZCVZnyRXb1rHiYwpe9vJJ8SoyDUlyVerR3Xa9x4UiCEnkNqyUsl8WX4MFikx63WOmaxQJ0SjZHm5i9iW7iXGqOjqraeq0",FID="ff331a508c5f57a04cf5a3e5";let PW=null,P=null;
+const ENC="bOgFIX5k+ZO702g6mQfozeubUdAP1RRxnyJgwjwdeFgxM7Si6jt2cQEc6S+hVkAfoCepCICsxRa1K+1oAf4JtSA+lI9lq+50IGW3m1QVuzLmStZzYDQEaMSU4pbesjyC20hicygst6rMj5ITd0r8pZYyQMyDaVDw8Hqe1uuhgUK8CtRBiyxDsZJyjgdddsOn5WF72wiGYH7F1pn/sjpv35kuqDZ9Q27QFIAyb40qnJ9cXpZfF5spLKEoRBzTLhEsz+qULskcZdwJ+3oyyaGwBr4M1C+3k9O66aQLNsOw8TSo1EEnqHpV/ECUllS1rlCeUx+o+bfgslDyfnhsvOQ78v4dbbgGbtXrzfHoEf2B0O8rxuFYCaGcs5v8l4I8a1NNRAS8yZ8S7AHehzvXVikjZYsRZWtm97OfxUPQ7Z6robSm5YHLTclDnwBm9vChGjtwqzQ2FmWxjmuBpchRUOAJOH6v5j95ocl0a7a3iOhKdGu2mPYDNUTn+pMgwzx7U/FzBWMmEipfvWBkh7KGcZgO77IJAh1Gb9q2g0dw/kElbgd4XIS1CQKp8LOonmrxn4ppx4EBr9xUjZgSs2eUIP0wy6BCLmFjuOMF96xnLnVKuISt6cbgyUaXT0v0vSG2yn1dKjvF09HDqDiKo8B9oIBCnO2eeFaS9dL25G16jLdrPQwBwrsmjUE/YwKXyEPr0NTcJpABPyPBy+vTMZtR3o8RZ9FPoY/w4dePWTRwhVjN64iE4cIEybCoQgYB3S7xRi52TDk/XpWnISb57l3nPHE8tBdDsgR7rngVaYjybCQNsLYF5x07zGYFUlcjKa1rgqyy+1Q7K0GOjz+Kdcu8bsB2lROhVXVxtFTIevR+hCOTbO6F5eY+fxHBgXlt358KEijI99ZBV7bs2zj8u0/0tvGMJoCnd/ZGyvx/YtEQUEqLupfKDNKzmYev2k25WunRs9CvzXA0PiHy+9DmIu0ELavIcQ9DNOaLi3k4fg3E18ohWWHAV0HQ3+/0UpoxtL+xzNlz98UuWTPbEukYW1nr/7SXJ6wfJoCJmFNC9dxqa2Y03E4IlxNw9aHPfCEjiLHlAetuJhSHF0Z2cbAUNSvNnbrF7e5hTKhibL5wq7uFPsa2d0wE9h7wdpXqnMkaB7HEOGdqAbCiFxOFS4DRbwVhOJqyyVIaj3a92JpXr81y/+NDzO8gtJL+AzUM6Kt3VDiDHd9vXI3BwIh/eqqdgGIzO8VnB+LzAhUFJbzfkvLj84jLPZymd9CPnn0dFBmAxH0ZIYComCrUEyO38ACI958rt09GFliz6TLT0FWcm7giCFqviiIFwWN1AIN19ABqyChiodoM5rkN",FID="ff331a508c5f57a04cf5a3e5";let PW=null,P=null;
 const b2u=b=>Uint8Array.from(atob(b),c=>c.charCodeAt(0)),u2b=u=>{let s='';for(let i=0;i<u.length;i+=8192)s+=String.fromCharCode.apply(null,u.subarray(i,i+8192));return btoa(s)};
 async function dk(pw,salt){let k=await crypto.subtle.importKey('raw',new TextEncoder().encode(pw),'PBKDF2',false,['deriveKey']);return crypto.subtle.deriveKey({name:'PBKDF2',salt,iterations:600000,hash:'SHA-256'},k,{name:'AES-GCM',length:256},false,['encrypt','decrypt'])}
 async function decText(pw,b){let r=b2u(b);return new TextDecoder().decode(await crypto.subtle.decrypt({name:'AES-GCM',iv:r.slice(16,28)},await dk(pw,r.slice(0,16)),r.slice(28)))}
 async function encText(t){let s=crypto.getRandomValues(new Uint8Array(16)),iv=crypto.getRandomValues(new Uint8Array(12)),c=new Uint8Array(await crypto.subtle.encrypt({name:'AES-GCM',iv},await dk(PW,s),new TextEncoder().encode(t)));let o=new Uint8Array(28+c.length);o.set(s);o.set(iv,16);o.set(c,28);return u2b(o)}
 async function unlock(pw,remember){P=JSON.parse(await decText(pw,ENC));PW=pw;if(remember)localStorage.setItem('rv-pw',pw);document.getElementById('gate').remove();
+// D-20261013-2305-books：神明旧章入口以只读模式打开，锁定/打回仍可见。
+P.readOnly=new URLSearchParams(location.search).get('readonly')==='1';
 document.title=P.title;document.getElementById('hdt').textContent=P.book+'·'+P.title;let sc=document.createElement('script');sc.textContent=document.getElementById('main').textContent;document.body.append(sc)}
 document.getElementById('gf').onsubmit=async e=>{e.preventDefault();let m=document.getElementById('gm');if(!window.crypto||!crypto.subtle){m.textContent='浏览器不支持解密（需 https）';return}m.textContent='解密中…';
 try{await unlock(document.getElementById('gp').value,document.getElementById('gr').checked)}catch(x){m.textContent='密码不对'}};
@@ -151,9 +155,41 @@ try{if(navigator.clipboard&&window.isSecureContext){await navigator.clipboard.wr
 if(legacy(t)){st.textContent='✓ 已复制正文 '+D.length+' 段';window.__copiedBody='execCommand';return}
 boxCopy(t)}
 function dl(name,text,type){let blob=new Blob([text],{type:type+';charset=utf-8'}),u=URL.createObjectURL(blob),a=document.createElement('a');a.href=u;a.download=name;a.rel='noopener';a.style.display='none';document.body.append(a);a.click();setTimeout(()=>{a.remove();URL.revokeObjectURL(u)},4000)}
+/* D-20261013-2305-books：精校选择独立保存在 rv:FID:fp:polish。 */
+const PK=K+':polish';let PL={items:{},choice:null};
+try{let saved=JSON.parse(localStorage.getItem(PK)||'null');if(saved&&saved.round===(P.polish||{}).round)PL=saved}catch(e){}
+function savePolish(){try{localStorage.setItem(PK,JSON.stringify({...PL,round:P.polish.round}));return true}catch(e){st.textContent='精校选择未能保存到本机，请释放浏览器空间后重试';return false}}
+function polishSignature(review){return JSON.stringify(review)}
+function buildPolishReview(){let p=P.polish;if(!p)return null;
+let items=p.items.map(x=>({...x,pick:(PL.items||{})[x.id]}));if(items.some(x=>!['accept','reject'].includes(x.pick))){alert('请逐项采纳或退回，也可点整章采纳／全部退回。');return null}
+let review={round:p.round,model:p.model,items};if(p.choice){let opt=p.choice.options.find(o=>o.id===PL.choice);if(!opt){alert('请先选择 ¶62 保留「洇」或换成「渗」。');return null}
+review.choice={id:p.choice.id,n:p.choice.n,old:p.choice.old,pick:opt.id};if(opt.new!=null)review.choice.new=opt.new}return review}
+function polishHighlight(){let ns=new Set((P.polish.items||[]).filter(x=>(PL.items||{})[x.id]==='accept').map(x=>x.n));if(P.polish.choice&&PL.choice==='replace')ns.add(P.polish.choice.n);document.querySelectorAll('main p[data-n]').forEach(p=>p.classList.toggle('placcept',ns.has(+p.dataset.n)))}
+function polishBar(){let p=P.polish,bar=$('plbar');if(!p)return;bar.classList.add('show');bar.innerHTML='';
+let title=document.createElement('b');title.textContent='精校待审 · 第 '+p.round+' 轮'+(p.model?' · '+p.model:'');bar.append(title);
+let actions=document.createElement('div');actions.className='pl-actions';
+for(let [pick,label] of [['accept','整章采纳'],['reject','全部退回']]){let b=document.createElement('button');b.type='button';b.id='plall-'+pick;b.textContent=label;b.onclick=()=>{let prior={...PL.items};PL.items=Object.fromEntries(p.items.map(x=>[x.id,pick]));if(!savePolish())PL.items=prior;polishBar()};actions.append(b)}bar.append(actions);
+p.items.forEach(it=>{let row=document.createElement('div');row.className='pl-row';row.dataset.id=it.id;let head=document.createElement('b');head.textContent=it.id+' · ¶'+it.n;row.append(head);
+let pair=document.createElement('div');pair.className='pl-text';for(let [label,text] of [['原：',it.old],['改：',it.new||'（删除）']]){let d=document.createElement('div');d.textContent=label+text;pair.append(d)}row.append(pair);
+let why=document.createElement('div');why.className='pl-why';why.textContent='理由：'+it.why;row.append(why);let picks=document.createElement('div');picks.className='pl-picks';
+for(let [value,label] of [['accept','采纳'],['reject','退回']]){let lb=document.createElement('label'),r=document.createElement('input');r.type='radio';r.name='pl-'+it.id;r.value=value;r.checked=(PL.items||{})[it.id]===value;r.onchange=()=>{let prior=(PL.items||{})[it.id];PL.items=PL.items||{};PL.items[it.id]=value;if(!savePolish())PL.items[it.id]=prior;polishBar()};lb.append(r,document.createTextNode(' '+label));picks.append(lb)}row.append(picks);bar.append(row)});
+if(p.choice){let row=document.createElement('div');row.className='pl-row';let label=document.createElement('b');label.textContent=p.choice.label;row.append(label);let picks=document.createElement('div');picks.className='pl-picks';
+p.choice.options.forEach(opt=>{let lb=document.createElement('label'),r=document.createElement('input');r.type='radio';r.name='pl-'+p.choice.id;r.value=opt.id;r.checked=PL.choice===opt.id;r.onchange=()=>{let prior=PL.choice;PL.choice=opt.id;if(!savePolish())PL.choice=prior;polishBar()};lb.append(r,document.createTextNode(' '+opt.label));picks.append(lb)});row.append(picks);bar.append(row)}
+let send=document.createElement('button');send.type='button';send.id='plsubmit';send.className='big';send.textContent='提交精校结果';send.disabled=submitting;send.onclick=submitPolish;let status=document.createElement('div');status.id='plstatus';status.textContent=PL.sent?'已提交 #'+PL.sent.number+' · 本机保留选择':'';bar.append(send,status);polishHighlight()}
+async function submitPolish(){if(P.readOnly||submitting)return;let review=buildPolishReview();if(!review)return;
+let signature=polishSignature(review);if(PL.sent&&PL.sent.signature===signature){st.textContent='已提交 #'+PL.sent.number;return}
+let payload={v:1,action:'精校采纳',book:BOOK,ch:CH,fid:FID,fp:P.fp,sha:P.sha,time:new Date().toISOString(),polish:review};
+setSubmitting(true);try{let body;try{body=await encText(JSON.stringify(payload))}catch(e){st.textContent='加密失败；精校选择仍在本机，请重试';return}
+let title='精校采纳+'+Math.random().toString(36).slice(2,8),issue=null,failed=false;try{issue=await postIssue(title,body)}catch(e){failed=true}
+if(issue){PL.sent={number:issue.number,signature};savePolish();st.textContent='✓ 已提交 #'+issue.number+' · 流水线约30秒内拉取';if($('plstatus'))$('plstatus').textContent='已提交 #'+issue.number;startStatusWatcher(issue.number);return}
+let u=REPO+'?title='+encodeURIComponent(title)+'&body='+encodeURIComponent(body),tip=failed?'直提失败，已回退 GitHub；':'已打开 GitHub，';
+if(u.length<=7000){window.open(u,'_blank')||(location.href=u);st.textContent=tip+'点 Submit 提交精校结果';return}
+let w=window.open(REPO+'?title='+encodeURIComponent(title),'_blank'),ok=false;try{if(navigator.clipboard&&window.isSecureContext){await navigator.clipboard.writeText(body);ok=true}}catch(e){}
+if(!ok)ok=legacy(body);if(!ok)boxCopy(body);st.textContent=tip+(ok?'已复制密文，粘贴后点 Submit 提交精校结果':'请复制密文，粘贴后点 Submit 提交精校结果');if(!w)location.href=REPO+'?title='+encodeURIComponent(title)
+}finally{setSubmitting(false)}}
 /* D-20261013-2256-oneshot：解锁后用加密包内凭据直提；状态提示不改当前正文／草稿的原指纹。 */
 let submitting=false,LAST_ISSUE=null,statusTimer=null,statusBusy=false;
-function setSubmitting(on){submitting=on;['lk','rj','sub','aes','migsub'].forEach(id=>{let b=$(id);if(b)b.disabled=on})}
+function setSubmitting(on){submitting=on;['lk','rj','sub','aes','migsub','plsubmit'].forEach(id=>{let b=$(id);if(b)b.disabled=on||!!P.readOnly})}
 async function postIssue(title,body){
 const tok=(P&&P.issueTok)||'';if(!tok)return null;
 const r=await fetch('https://api.github.com/repos/r42hgghpkz-lang/review/issues',{
@@ -162,14 +198,14 @@ if(!r.ok){const t=await r.text();throw new Error('HTTP '+r.status+' '+t.slice(0,
 function stopStatusWatcher(){if(statusTimer!==null)clearInterval(statusTimer);statusTimer=null}
 async function refreshStatus(){if(statusBusy||!LAST_ISSUE)return;statusBusy=true;
 try{const r=await fetch(location.href,{cache:'no-store'});if(!r.ok)return;const match=(await r.text()).match(/const ENC="([^"]+)"/);if(!match)return;
-const fresh=JSON.parse(await decText(PW,match[1]));if(fresh.status===P.status&&fresh.fp===P.fp)return;
+const fresh=JSON.parse(await decText(PW,match[1]));if(fresh.status===P.status&&fresh.fp===P.fp&&(fresh.polish||{}).state===(P.polish||{}).state)return;
 $('meta').textContent=(fresh.status||'')+' · 指纹 '+fresh.fp;st.textContent='✓ 流水线已更新：'+(fresh.status||'')+'（指纹 '+fresh.fp+'）· 点刷新看新正文';
 let b=$('status-refresh');if(!b){b=document.createElement('button');b.id='status-refresh';b.type='button';b.textContent='刷新';b.onclick=()=>location.reload();st.after(b)}
 }catch(e){}finally{statusBusy=false}}
 function startStatusWatcher(num){LAST_ISSUE=num;stopStatusWatcher();statusTimer=setInterval(refreshStatus,15000)}
 window.addEventListener('pagehide',stopStatusWatcher);
 window.addEventListener('pageshow',()=>{if(LAST_ISSUE&&statusTimer===null)startStatusWatcher(LAST_ISSUE)});
-async function submit(action){if(submitting)return;let _ae0=(typeof AE!=='undefined')?Object.keys(AE).length:0;if(action=='打回'&&!A.length&&!_ae0){alert('打回请先写批注（点段落或选中文字）。');return}
+async function submit(action){if(P.readOnly||submitting)return;let _ae0=(typeof AE!=='undefined')?Object.keys(AE).length:0;if(action=='打回'&&!A.length&&!_ae0){alert('打回请先写批注（点段落或选中文字）。');return}
 if(action=='作者改动'&&!_ae0){st.textContent='没有待提交的改动';return}
 if(action=='批注'&&!A.length&&!_ae0){st.textContent='还没有批注或作者改动';return}
 if(action=='微调')action='微调锁定';
@@ -204,7 +240,7 @@ A.slice().sort((a,b)=>a.n-b.n||(a.t<b.t?-1:1)).forEach(x=>{let p=$('p'+x.n);p&&p
 d.innerHTML='<span class="h"></span><div class="q"></div><div class="b"></div><div style="text-align:right"><button>编辑</button> <button>删除</button></div>';
 d.querySelector('.h').textContent='¶'+x.n+' · '+new Date(x.t).toLocaleString().slice(0,-3);d.querySelector('.q').textContent=x.q;d.querySelector('.b').textContent=x.c;d.querySelector('.h').onclick=()=>p.scrollIntoView({behavior:'smooth',block:'center'});
 let [e,r]=d.querySelectorAll('button');e.onclick=()=>open_(x.n,x.q,x);r.onclick=()=>{if(confirm('删除这条批注？')){A=A.filter(y=>y!==x);render();sync()}};sd.append(d)})}
-function open_(n,q,ex){$('fb').style.display='none';cur={n,q,ex};document.querySelectorAll('p.sel').forEach(p=>p.classList.remove('sel'));$('p'+n).classList.add('sel');
+function open_(n,q,ex){if(P.readOnly)return;$('fb').style.display='none';cur={n,q,ex};document.querySelectorAll('p.sel').forEach(p=>p.classList.remove('sel'));$('p'+n).classList.add('sel');
 $('eq').textContent='¶'+n+'：'+q;$('et').value=ex?ex.c:'';$('ed').style.display='block';$('et').focus()}
 function close_(){$('ed').style.display='none';document.querySelectorAll('p.sel').forEach(p=>p.classList.remove('sel'));cur=null}
 function selInfo(){let s=getSelection();if(!s.rangeCount||s.isCollapsed)return null;let q=s.toString().trim();if(!q)return null;let a=s.anchorNode;a=a.nodeType==1?a:a.parentElement;let p=a&&a.closest('main p');if(!p)return null;return{n:+p.dataset.n,q,r:s.getRangeAt(0).getBoundingClientRect()}}
@@ -233,7 +269,7 @@ let u=aeUnsent(),c=$('aecnt');c.style.display=k?'inline-block':'none';c.textCont
 function aeUnsent(){return Object.keys(AE).filter(n=>AESENT[n]!=AE[n]).length}
 function aeBadge(p,sent){let bd=p.querySelector('.aeb');if(!bd)return;let n=p.dataset.n;if(sent==null)sent=AESENT[n]==AE[n];bd.textContent=(sent?'你改的·已提交':'你改的·未提交')+(p.classList.contains('aeorig')?' · 看改后':' · 看原文');bd.title='点击切换原文／改后'}
 window.addEventListener('beforeunload',e=>{if(aeUnsent()){e.preventDefault();e.returnValue='还有未提交的改动';return e.returnValue}});
-function aeOpen(n){aeN=n;$('aen').textContent=n;$('aeo').textContent='原文：'+D[n-1];$('aet').value=AE[n]!=null?AE[n]:D[n-1];$('aed').style.display='block';$('aet').focus()}
+function aeOpen(n){if(P.readOnly)return;aeN=n;$('aen').textContent=n;$('aeo').textContent='原文：'+D[n-1];$('aet').value=AE[n]!=null?AE[n]:D[n-1];$('aed').style.display='block';$('aet').focus()}
 document.querySelectorAll('main p[data-n]').forEach(p=>{let b=document.createElement('button');b.className='eb';b.textContent='编辑';b.title='作者手动微调这一段';b.onclick=e=>{e.stopPropagation();e.preventDefault();aeOpen(+p.dataset.n)};p.prepend(b)});
 $('aec').onclick=()=>{$('aed').style.display='none'};
 $('aer').onclick=()=>{let prior=AE[aeN];delete AE[aeN];if(!aeSync()){AE[aeN]=prior;return}$('aed').style.display='none'};
@@ -271,5 +307,7 @@ migrate();Object.keys(AE).forEach(n=>{if(AE[n]==D[n-1])delete AE[n]});
 const _aeS=aeSync;aeSync=function(){let ok=_aeS();if(ok)migBar();return ok};
 markAuthored();
 showDraftRecovery();aeSync();
+polishBar();
 load();
+if(P.readOnly){setSubmitting(false);document.querySelectorAll('main p.aedit').forEach(p=>p.classList.remove('aedit'));document.querySelectorAll('main button,main input,#plbar button,#plbar input').forEach(b=>b.disabled=true);st.textContent='正文只读浏览 · '+(P.status||'')}
 </script></body></html>
