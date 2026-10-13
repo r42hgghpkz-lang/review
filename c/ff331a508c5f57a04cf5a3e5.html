@@ -48,7 +48,7 @@ p .eb{position:absolute;right:-3.4em;top:.35em;text-indent:0;font:11px/1 sans-se
 <div style="font-size:17px;margin-bottom:10px">请输入阅读密码</div><input id="gp" type="password" autocomplete="current-password" style="width:100%;font-size:16px;padding:8px;border:1px solid var(--bd);border-radius:6px;background:var(--bg);color:var(--fg)">
 <label style="display:block;margin:10px 0;font-size:14px"><input type="checkbox" id="gr"> 记住密码（仅本机）</label><button style="width:100%;padding:8px;background:var(--ac);color:#fff;border:0;border-radius:6px">打开</button><div id="gm" style="color:var(--ac);font-size:13px;margin-top:8px"></div></form></div>
 <script>
-const ENC="1tlZiCH/UHvd3AzUiSaP+6AcpC4iyFoMYmaXWsY10ukiI8oxeLAsqsjmpGAfyaZ/CNvCMWrWmMxe6nJf7J3+NcabCa9JCEDnTE5HVrBzRI+Vv75V8ND49GkzESs6JJGU0xCv3Tu1LQX9rN7g4Qazmwiq9bqogsY53/wI4vNGiCc/XC13pwWSIjMIAHct0Bjm+dK2A9YsuqbbHKWF6LA6I6Gs94vTbxa6Sdcv9DYZTIyJZ6TJZ42bOjCQlEDyZJDptsGl4EPEZfFwFYmHLwz9XlnVMgbNkj5N2TtdSfr7wHyNJLxqwW/S72gs9lYAqVRhLC+e8kuZX+qrDrYqBHWAZtSD3GZsYyIqQupgNb3X3Uh668/VGgwoS6o0nRRXpmNR5y/QwUJQN4Qti5sJDgsqT2S3oIBVdlPYDYgXiJmMwSfsswM+kTEdr0ZL2oAsXqvJ09rz3r/rWxbGYfjsDznEJ5TPAJGDK77tZ9tQlZO48/XdAocdorqvhCwD6tf9jC281JYIHgvT2ZPdG4d+ZlKvK3W67q72lDNT1WAdKxiE6aslngCumU9fC2c/ioYSWpgcC+CkJWO6vDYgUPalVIkzfEjlD8jsFxHEK1sWnIlQk4GDVW1mg4GiXjUit4uBZmUuGZ2sCHjowAqM492QjEoePWHu25XY9KwLLgT1pwhyYtDKQQ0ulHx8kpDTKT1FIijiCevqRBGA+aCjbmm3LVzZ4FsIgR8H2ZTIxwC6gxttCJ8OsJg7Z6ueYJ97K4QEv8buLYZVXPDgA3GqSHVY6wEwYi7v8EXbi2LF/CRTLtWsBkkBsJKg0PXLIbWuDY1XJ8Y/PPoC9UbCXFewKrKplfbEnUkAyyTMZah/xLu8po7avkVAN/KNoxpAMzx4nC28ua0pEbkeIj5axDbkEtlwNWduGGg09uQa2JXRTQvSKbTr1aaR9q8bgpIIbvDMl6QLrfZj4ZI+AcWiQq+WiWXSvkTALqq0C0KFCsQYICJjhDN8rdbg1qz9XoyMsxdWGNSL/lUf1d9MFJZUccfgeDuClmptRabZX8CeXDCiHnkx08LmsBFUpCGW7nsgpTbNWVcnqiZo5QED0+w4rFhKh/b+y4T2N2Iulvc8Wt1CmVhUsvt/C5mB9953whk3rab6V0GhZoU4+QDhj81SRP83sxpH3omeA6W2BuJk8cQ+NDpYhweY3jU+LW5h+NIEvyI3jvJwn/IiI3fBad8Do/cORy4GvZCxwoqb7+o3B8lkOn/bacCIRL4JHICwEcyt1Wj81UMxeJqSJoTm+64UkA==",FID="ff331a508c5f57a04cf5a3e5";let PW=null,P=null;
+const ENC="voXGnOMaGGWT2jH6srwSvIHY30q+X5cdnzj7R99+nlN1KDunIONrN61PRs4f5/JZD/6qk9DVDThMfpHO6FOvQNZmgkhkSUHv5PzwykvUBCLvqCxtuKtftObRm6txBxl7kMxdVE0bzFjW5m/wJNgDaU2vXSzqZimH/JSHp2ze0YYY/35PVxnEC6TTNTAnfHOa89Xc3qfrFc80qOtkldzsslEmSWT9sqs1ve/BkUCtNnr3BPmQQQ6BrClhAPuk7bGlVFiP9g0d3R0kGPdz1KeITfqDC1KLdlb9GvT+u8P1g6N75ulIJ6/UXsBEoh8TN+XRTWu0U+gfsyuP7lObk1zT2u5vbu+wHojXSIihIroIDfI0cX3tyPIgUggvbqx/CqDQjnIGH/oIZ8DOkJvMg7atRO0FGJWp9x+1CexM5O3y4NZFN7O1f6pXec+SGWiqaSxLY4sfx/jGkAEN9KOpDVeAjUV/P29dEwaXBrHLoBXsyBj5Xoy0Mq8RbrJhROLFhiKpHNmplwMdNbFOevifhaM3QN1GrxNrqhaQL27MeKP43gPyqgB7PRK8QvGIsmkqIZC8pBGE+jhedjf/7lUAqEZvfMHRybpb8U48MI7yvtQ9rPBXfRi6ZajpFYa1fNIaSoe0OqQk/rfgWt1mD+kScLK1rdBbw/vXbIVKghcgoZumkSTfSQtwlE7LBIWKWoapitkOvx+Nw/i3t0xJsarVh2ds1ImZDiPabM9kCUqLmN+FDA84W6aDsOldPL0SnSkvXpbKw87MfgdRRyJo4q76ocQU53p9ze7yd6ItGZ+P5AsWpnuVPjuwqe49on5rxEbREUNmsr5FgNQ5eXeA8umnXtdcZfQOMMFsdN79uyNa/Efk71qLglxHEcm/ZTGdTYAjaHhnpipUO+rnSyCCy5eKSDGPqlBRgDM+9lnsifMWjtVHO6xg1jkDtjpJe9ve4t5ckWJzb8ONo5ZBSVzssNvTikdI8HdT3zGeqME/dioLq5gs+CSzl3TeTZNfB4H1YCdVOpC+eAfWJzXSMpqxQYaancd2ClFkoVzE/5c0UrbSAe05S7WX7Ab42HgiIF//C/DifAj2A1pJ/Y3y4Pu7rFTcNSIYySzBlu61tQOSgEkyLqiLbjeRKnSQu2VSv+iW0RZBw0vDYRdgN78ygotbECs3rG/pSFCspZ8tfyJAuZMiaNhq52bA9Ua7mN7S7K01guwxMofIEz6LfNTi+M2EK3EWAMwm9y60nd3zEFqnRPjrad9W2/RtMNzv5fY8LgohjAK6qoxx9EI8xCdsiA==",FID="ff331a508c5f57a04cf5a3e5";let PW=null,P=null;
 const b2u=b=>Uint8Array.from(atob(b),c=>c.charCodeAt(0)),u2b=u=>{let s='';for(let i=0;i<u.length;i+=8192)s+=String.fromCharCode.apply(null,u.subarray(i,i+8192));return btoa(s)};
 async function dk(pw,salt){let k=await crypto.subtle.importKey('raw',new TextEncoder().encode(pw),'PBKDF2',false,['deriveKey']);return crypto.subtle.deriveKey({name:'PBKDF2',salt,iterations:600000,hash:'SHA-256'},k,{name:'AES-GCM',length:256},false,['encrypt','decrypt'])}
 async function decText(pw,b){let r=b2u(b);return new TextDecoder().decode(await crypto.subtle.decrypt({name:'AES-GCM',iv:r.slice(16,28)},await dk(pw,r.slice(0,16)),r.slice(28)))}
@@ -141,17 +141,22 @@ boxCopy(t)}
 function dl(name,text,type){let blob=new Blob([text],{type:type+';charset=utf-8'}),u=URL.createObjectURL(blob),a=document.createElement('a');a.href=u;a.download=name;a.rel='noopener';a.style.display='none';document.body.append(a);a.click();setTimeout(()=>{a.remove();URL.revokeObjectURL(u)},4000)}
 async function submit(action){if(action=='打回'&&!A.length){alert('打回请先写批注（点段落或选中文字）。');return}
 if(action=='批注'&&!A.length){st.textContent='还没有批注';return}
-if(action=='锁定'&&tastePending().length){alert('【待拍板】口味分歧未选：'+tastePending().map(d=>d.label).join('、')+'\n请先在决策点里选定，再锁定。');return}
-if(action=='锁定'&&!confirm('确认通过并锁定这一版？'+(DECS.length?'\n\n决策将落正文（编辑执行 apply_decisions，未落地不得发布）：\n'+DECS.map(d=>'· '+d.label+'＝'+choiceOf(d)+' → '+apHint(d,choiceOf(d))).join('\n'):'')))return;if(action=='打回'&&!confirm('确认打回？共 '+A.length+' 条批注会一并提交。'))return;
+if(action=='微调')action='微调锁定';
+let aeNs=(typeof AE!=='undefined')?Object.keys(AE).map(Number).sort((a,b)=>a-b):[];
+if(action=='锁定'&&aeNs.length)action='微调锁定';
+if((action=='锁定'||action=='微调锁定')&&tastePending().length){alert('【待拍板】口味分歧未选：'+tastePending().map(d=>d.label).join('、')+'\n请先在决策点里选定，再锁定。');return}
+if(action=='微调锁定'){if(!aeNs.length){alert('没有待提交的微调');return}
+if(!confirm('将落改这 '+aeNs.length+' 段并锁定这一版？\n'+aeNs.map(n=>'¶'+n+'：'+D[n-1].slice(0,14)+'… → '+AE[n].slice(0,14)+'…').join('\n')+(DECS.length?'\n\n决策将落正文：\n'+DECS.map(d=>'· '+d.label+'＝'+choiceOf(d)+' → '+apHint(d,choiceOf(d))).join('\n'):'')+'\n\n落稿前核 sha／原文，对不上拒绝不硬改。'))return}
+else if(action=='锁定'&&!confirm('确认通过并锁定这一版？'+(DECS.length?'\n\n决策将落正文（编辑执行 apply_decisions，未落地不得发布）：\n'+DECS.map(d=>'· '+d.label+'＝'+choiceOf(d)+' → '+apHint(d,choiceOf(d))).join('\n'):'')))return;if(action=='打回'&&!confirm('确认打回？共 '+A.length+' 条批注会一并提交。'))return;
 let decisions=DECS.map(d=>{let c=choiceOf(d),a=apOf(d,c),k=((d.applies||{})[c]||{}).keys||[];return{id:d.id,label:d.label,choice:c,confirmed:isConfirmed(d),apply:a,keys:k}});
-if((action=='锁定'||action=='打回')&&DECS.length&&pendingDec()){if(!confirm('还有 '+pendingDec()+' 项待确认（将按已选或默认项提交）。仍要'+(action=='锁定'?'锁定':'打回')+'？'))return}
-let payload={v:1,action,book:BOOK,ch:CH,fid:FID,fp:P.fp,time:new Date().toISOString(),notes:so().map(x=>({n:x.n,q:x.q,c:x.c,t:x.t})),decisions};if(action.startsWith('特批')){payload.waiver=WVSEL;payload.notes=[];payload.decisions=[]}
+if((action=='锁定'||action=='微调锁定'||action=='打回')&&DECS.length&&pendingDec()){if(!confirm('还有 '+pendingDec()+' 项待确认（将按已选或默认项提交）。仍要'+(action=='打回'?'打回':'锁定')+'？'))return}
+let payload={v:1,action,book:BOOK,ch:CH,fid:FID,fp:P.fp,time:new Date().toISOString(),notes:so().map(x=>({n:x.n,q:x.q,c:x.c,t:x.t})),decisions};if(action=='微调锁定'){payload.sha=P.sha||'';payload.edits=aeNs.map(n=>({book:BOOK,ch:CH,n,old:D[n-1],new:AE[n],sha:P.sha||''}))}if(action.startsWith('特批')){payload.waiver=WVSEL;payload.notes=[];payload.decisions=[]}
 
-let title=(action=='批注'?'批注+':'审阅+')+Math.random().toString(36).slice(2,8),body=await encText(JSON.stringify(payload)),u=REPO+'?title='+encodeURIComponent(title)+'&body='+encodeURIComponent(body);
-if(u.length<=7000){window.open(u,'_blank')||(location.href=u);st.textContent='已打开 GitHub，点 Submit 提交';return}
+let title=(action=='批注'?'批注+':action=='微调锁定'?'微调锁定+':'审阅+')+Math.random().toString(36).slice(2,8),body=await encText(JSON.stringify(payload)),u=REPO+'?title='+encodeURIComponent(title)+'&body='+encodeURIComponent(body);
+if(u.length<=7000){window.open(u,'_blank')||(location.href=u);st.textContent=action=='微调锁定'?'已打开 GitHub，点 Submit 提交微调并锁定':'已打开 GitHub，点 Submit 提交';if(action=='微调锁定'&&confirm('在 GitHub 点了 Submit 之后，可清掉本机暂存的微调。现在清掉？')){AE={};aeSync()}return}
 let w=window.open(REPO+'?title='+encodeURIComponent(title),'_blank'),ok=false;
 try{if(navigator.clipboard&&window.isSecureContext){await navigator.clipboard.writeText(body);ok=true}}catch(e){}
-if(!ok)ok=legacy(body);if(ok){st.textContent='已复制，粘贴即可';alert('已复制（已加密），粘贴即可。\n在打开的 GitHub 页面正文框里粘贴，再点 Submit。')}else boxCopy(body);if(!w)location.href=REPO+'?title='+encodeURIComponent(title)}
+if(!ok)ok=legacy(body);if(ok){st.textContent='已复制，粘贴即可';alert('已复制（已加密），粘贴即可。\n在打开的 GitHub 页面正文框里粘贴，再点 Submit。')}else boxCopy(body);if(!w)location.href=REPO+'?title='+encodeURIComponent(title);if(action=='微调锁定'&&confirm('在 GitHub 点了 Submit 之后，可清掉本机暂存的微调。现在清掉？')){AE={};aeSync()}}
 function diffs(){let d=P.diffs||[];if(!d.length)return;let h=document.createElement('details');let sm=document.createElement('summary');sm.textContent='上一版改了 '+d.length+' 处（'+(P.diffFrom||'')+'）— 正文已标改，点开看对照';h.append(sm);
 d.forEach(x=>{let r=document.createElement('div');r.className='pr';let b=document.createElement('div'),a=document.createElement('div');b.className='b4';a.className='af';b.textContent=x.b||'（无）';a.textContent=x.a||'（删去）';
 let m=document.createElement('div');m.className='mt';m.style.gridColumn='1/-1';let ns=x.ns&&x.ns.length?x.ns:(x.n?[x.n]:[]);m.textContent=ns.length?('改后 ¶'+ns.join('、')):(x.n?('改后 ¶'+x.n):'（仅删）');
@@ -179,9 +184,10 @@ $('xm').onclick=()=>dl(TITLE+'-批注.md','# '+TITLE+' 批注\n\n'+so().map(x=>'
 $('xj').onclick=()=>dl(TITLE+'-批注.json',JSON.stringify({title:TITLE,notes:so().map(x=>({段号:x.n,原句:x.q,批注:x.c,时间:x.t}))},null,2),'application/json');
 $('tg').onclick=()=>sd.classList.toggle('open');
 $('th').onclick=()=>{let r=document.documentElement,dk=r.dataset.theme?r.dataset.theme=='dark':matchMedia('(prefers-color-scheme:dark)').matches;r.dataset.theme=dk?'light':'dark';localStorage.setItem('rv-theme',r.dataset.theme)};
-/* 作者手动微调（2026-10-13）：每段「编辑」→ 本机暂存 → 「提交微调」加密进 issue；落稿由 apply_author_edits.py 核 sha＋原文 */
+/* 作者手动微调（2026-10-13；16:03 一体）：每段「编辑」→ 本机暂存 → 「提交微调并锁定」加密进 issue（action=微调锁定）；落稿 apply_author_edits → apply_locks */
 const EK=K+':edits';let AE={};try{AE=JSON.parse(localStorage.getItem(EK)||'{}')||{}}catch(e){AE={}}let aeN=0;
-function aeSync(){try{localStorage.setItem(EK,JSON.stringify(AE))}catch(e){}let k=Object.keys(AE).length,b=$('aes');b.style.display=k?'':'none';b.textContent='提交微调（'+k+' 段）';
+function aeSync(){try{localStorage.setItem(EK,JSON.stringify(AE))}catch(e){}let k=Object.keys(AE).length,b=$('aes'),lk=$('lk');b.style.display='none';
+if(k){lk.textContent='提交微调并锁定（'+k+' 段）';lk.title='一次提交：落改 '+k+' 段并锁定'}else{lk.textContent='通过锁定';lk.title=''}
 document.querySelectorAll('main p[data-n]').forEach(p=>{let n=p.dataset.n,on=n in AE;p.classList.toggle('aedit',on);p.title=on?'已微调（待提交）：'+AE[n]:''})}
 function aeOpen(n){aeN=n;$('aen').textContent=n;$('aeo').textContent='原文：'+D[n-1];$('aet').value=AE[n]!=null?AE[n]:D[n-1];$('aed').style.display='block';$('aet').focus()}
 document.querySelectorAll('main p[data-n]').forEach(p=>{let b=document.createElement('button');b.className='eb';b.textContent='编辑';b.title='作者手动微调这一段';b.onclick=e=>{e.stopPropagation();e.preventDefault();aeOpen(+p.dataset.n)};p.prepend(b)});
@@ -189,13 +195,7 @@ $('aec').onclick=()=>{$('aed').style.display='none'};
 $('aer').onclick=()=>{delete AE[aeN];$('aed').style.display='none';aeSync()};
 $('aeok').onclick=()=>{let v=$('aet').value.replace(/\r/g,'');if(/\n/.test(v)){if(!confirm('改后文含换行，会被合并成一段（换行删掉）。继续？'))return;v=v.replace(/\n+/g,'')}v=v.trim();
 if(!v){alert('不能清空整段。要删段请写批注。');return}if(v==D[aeN-1])delete AE[aeN];else AE[aeN]=v;$('aed').style.display='none';aeSync()};
-$('aes').onclick=async()=>{let ns=Object.keys(AE).map(Number).sort((a,b)=>a-b);if(!ns.length)return;
-if(!confirm('提交 '+ns.length+' 段微调？\n'+ns.map(n=>'¶'+n+'：'+D[n-1].slice(0,14)+'… → '+AE[n].slice(0,14)+'…').join('\n')+'\n\n编辑落稿前会核对原稿 sha256 和原文，对不上会拒绝、不硬改。'))return;
-let payload={v:1,action:'微调',book:BOOK,ch:CH,fid:FID,fp:P.fp,sha:P.sha||'',time:new Date().toISOString(),edits:ns.map(n=>({book:BOOK,ch:CH,n,old:D[n-1],new:AE[n],sha:P.sha||''}))};
-let title='微调+'+Math.random().toString(36).slice(2,8),body=await encText(JSON.stringify(payload)),u=REPO+'?title='+encodeURIComponent(title)+'&body='+encodeURIComponent(body);
-if(u.length<=7000){window.open(u,'_blank')||(location.href=u);st.textContent='已打开 GitHub，点 Submit 提交微调'}else{let w=window.open(REPO+'?title='+encodeURIComponent(title),'_blank'),ok=false;
-try{if(navigator.clipboard&&window.isSecureContext){await navigator.clipboard.writeText(body);ok=true}}catch(e){}if(!ok)ok=legacy(body);if(ok){st.textContent='已复制，粘贴即可';alert('微调已加密复制。\n在打开的 GitHub 页面正文框里粘贴，再点 Submit。')}else boxCopy(body);if(!w)location.href=REPO+'?title='+encodeURIComponent(title)}
-if(confirm('在 GitHub 点了 Submit 之后，可清掉本机暂存的微调。现在清掉？')){AE={};aeSync()}};
+$('aes').onclick=()=>submit('微调锁定');
 aeSync();
 load();
 </script></body></html>
