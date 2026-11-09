@@ -1,0 +1,2 @@
+This file marks the private gateway tree. publish_pages_static.py must not copy it.
+The GitHub Pages site must not serve this directory.

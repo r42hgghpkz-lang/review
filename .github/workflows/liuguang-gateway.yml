@@ -1,0 +1,15 @@
+name: liuguang-gateway
+on:
+  pull_request:
+  push:
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install cryptography
+      - run: python3 liuguang-gateway/tests/test_gateway.py
+      - run: python3 liuguang-gateway/tests/test_publish_exclude.py

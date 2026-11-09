@@ -1,0 +1,40 @@
+流光勾选直接提交 — 最小安装。不要把 backend 放进 GitHub Pages，不要合并或部署 main。
+
+草稿键仍是 liuguang-checklist-20261109-v1。新页只读这个键，打开时不改写。
+清空只发生在作者自己点「清空本机草稿」并确认之后。提交失败也不会清草稿。
+作者当前旧标签先不要刷新。本包没有改现网。你换上 frontend 之后，同键刷新兼容已由 logs/draft-compat.log 覆盖全部 112 题的 status、text、parkUntil、updatedAt。
+
+1) 后端（私密机器，源码用本包 backend/，不要放进站点目录）
+
+umask 077
+install -m 0600 /dev/null /path/outside-repo/liuguang-submit-secret
+# 用本地编辑器把口令写进该文件。不要写进命令行、网页或仓库。
+
+export LIUGUANG_ANSWERS_ROOT=/workspace/tmp/liuguang-design-20261109/answers
+export LIUGUANG_SUBMIT_PASSWORD_FILE=/path/outside-repo/liuguang-submit-secret
+export LIUGUANG_ALLOWED_ORIGINS=https://r42hgghpkz-lang.github.io
+export LIUGUANG_BIND=127.0.0.1
+export LIUGUANG_PORT=8791
+cd backend
+python3 server.py
+
+看到 LIUGUANG_READY bind=127.0.0.1 port=8791 后，把你自己的 HTTPS 路由转到 127.0.0.1:8791。
+若 /workspace 本身就是 git 仓库，这个默认目录会被拒绝，换一个仓库外的绝对路径。
+目录会收成 0700，文件 0600。不要设置 LIUGUANG_KDF_ITERS。
+
+2) 原页配置（同一 URL /review/liuguang/ ，不是第二页）
+
+只替换站点里的这四个文件：
+  frontend/index.html
+  frontend/questions.json
+  frontend/gateway.json
+  frontend/README.md
+
+发布前把 frontend/gateway.json 的 "gateway" 改成 https://你的网关源
+（只要源，没有路径、用户名、口令）。本包里的值是空字符串。
+不要上传 backend/。
+
+3) 莉莉丝读回（私密机器上的 CLI，网页没有读回）
+
+cd backend
+python3 readback.py --root "$LIUGUANG_ANSWERS_ROOT" --password-file "$LIUGUANG_SUBMIT_PASSWORD_FILE" --check-perms --latest
