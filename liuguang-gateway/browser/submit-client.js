@@ -5,6 +5,28 @@ const PENDING_KEY = 'liuguang-checklist-20261109-v1-pending-submit';
 const SESSION_KEY = 'liuguang-submit-session';
 let GATEWAY = '';
 let inflight = false;
+let linkKey = consumeLinkKey();
+
+function consumeLinkKey(){
+  const hash = location.hash || '';
+  if(!hash) return '';
+  let key = '';
+  try{ key = new URLSearchParams(hash.slice(1)).get('k') || ''; }catch(e){ key = ''; }
+  if(!key) return '';
+  try{ history.replaceState(null, '', location.pathname + location.search); }catch(e){}
+  return key;
+}
+function hidePasswordBoxIfLinked(){
+  const label = document.getElementById('submit-password-label');
+  if(!label) return;
+  if(!linkKey) return;
+  label.hidden = true;
+  const input = document.getElementById('submit-password');
+  if(input){
+    input.value = '';
+    input.disabled = true;
+  }
+}
 
 function loopbackHost(){
   const h = location.hostname;
@@ -145,13 +167,18 @@ async function resolveGateway(){
 function setGatewayStatus(){
   if(!GATEWAY){
     setStatus('unconfigured', '提交网关还没配置。草稿只在这台设备上，没有发送。');
+  }else if(linkKey || readSession(GATEWAY)){
+    setStatus('idle', '链接已认证。点提交即可，不必再填口令。草稿仍留在本机，直到回执成功。');
   }else{
-    setStatus('idle', '填写提交口令后点提交。口令只发到网关，不写入页面和草稿。');
+    setStatus('idle', '没有带密钥链接时才填口令。口令不写入页面和草稿。');
   }
 }
 async function ensureSession(gateway, password){
   const existing = readSession(gateway);
-  if(existing) return existing;
+  if(existing){
+    linkKey = '';
+    return existing;
+  }
   const ctrl = abortAfter(20000);
   let res;
   try{
@@ -180,6 +207,7 @@ async function ensureSession(gateway, password){
     throw err;
   }
   sessionStorage.setItem(SESSION_KEY, JSON.stringify({gateway, token: ack.token, expiresAt: ack.expiresAt}));
+  linkKey = '';
   return ack.token;
 }
 async function postSubmission(gateway, token, key, answers){
@@ -236,9 +264,10 @@ async function submitChecklist(){
     setStatus('fail', '没有可提交的答案。草稿没有被清空。');
     return;
   }
-  const password = document.getElementById('submit-password').value;
-  if(!password){
-    setStatus('fail', '请先填写提交口令。草稿没有发送，也没有清空。');
+  const typed = (document.getElementById('submit-password') || {}).value || '';
+  const password = linkKey || typed;
+  if(!password && !(GATEWAY && readSession(GATEWAY))){
+    setStatus('fail', '请用带密钥的链接打开，或填写口令。草稿没有发送，也没有清空。');
     return;
   }
   inflight = true;
@@ -281,7 +310,9 @@ async function submitChecklist(){
     const localDigest = await digestAnswers(answers);
     clearPending();
     if(localDigest === result.ack.digest){
-      document.getElementById('submit-password').value = '';
+      linkKey = '';
+      const pw = document.getElementById('submit-password');
+      if(pw) pw.value = '';
       const again = result.ack.replay === true ? '（同一次重试，没有另存一份）' : '';
       setStatus('ok', '已写入私密收据 ' + result.ack.receiptId + '。本机草稿保留，没有清空。' + again);
     }else{
@@ -297,6 +328,7 @@ async function submitChecklist(){
 if(loopbackHost()){
   window.__liuguangTest = {canonicalJSON, digestAnswers, collectAnswers, STORAGE_KEY, PENDING_KEY, ackOk};
 }
+hidePasswordBoxIfLinked();
 document.getElementById('btn-submit').addEventListener('click', () => { submitChecklist(); });
 document.getElementById('submit-password').addEventListener('keydown', (e) => {
   if(e.key === 'Enter'){ e.preventDefault(); submitChecklist(); }

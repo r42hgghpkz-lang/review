@@ -399,7 +399,7 @@ def load_gateway() -> tuple[Gateway, str, int]:
     if not origins:
         raise SystemExit('LIUGUANG_ALLOWED_ORIGINS is empty')
     bind = os.environ.get('LIUGUANG_BIND', '127.0.0.1')
-    port = int(os.environ.get('LIUGUANG_PORT', '8791'))
+    port = int(os.environ.get('LIUGUANG_PORT', '8793'))
     iters = store.kdf_iters_from_env()
     if iters != crypto_box.PRODUCTION_KDF_ITERS:
         sys.stderr.write('kdf iterations are below the review baseline (test opt-in)\n')

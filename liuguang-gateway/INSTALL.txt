@@ -14,11 +14,12 @@ export LIUGUANG_ANSWERS_ROOT=/workspace/tmp/liuguang-design-20261109/answers
 export LIUGUANG_SUBMIT_PASSWORD_FILE=/path/outside-repo/liuguang-submit-secret
 export LIUGUANG_ALLOWED_ORIGINS=https://r42hgghpkz-lang.github.io
 export LIUGUANG_BIND=127.0.0.1
-export LIUGUANG_PORT=8791
+export LIUGUANG_PORT=8793
 cd backend
 python3 server.py
 
-看到 LIUGUANG_READY bind=127.0.0.1 port=8791 后，把你自己的 HTTPS 路由转到 127.0.0.1:8791。
+看到 LIUGUANG_READY bind=127.0.0.1 port=8793 后，把你自己的 HTTPS 路由转到 127.0.0.1:8793。
+8791 已被本机 sand-host 占用，不要用它。要换端口就改 LIUGUANG_PORT。
 若 /workspace 本身就是 git 仓库，这个默认目录会被拒绝，换一个仓库外的绝对路径。
 目录会收成 0700，文件 0600。不要设置 LIUGUANG_KDF_ITERS。
 
@@ -32,7 +33,12 @@ python3 server.py
 
 发布前把 frontend/gateway.json 的 "gateway" 改成 https://你的网关源
 （只要源，没有路径、用户名、口令）。本包里的值是空字符串。
-不要上传 backend/。
+不要上传 backend/，不要把密钥或答案放进 Pages。
+
+作者链接是同一页加片段：https://r42hgghpkz-lang.github.io/review/liuguang/#k=<本机秘密>
+片段不会出现在发往 GitHub Pages 的 HTTP 请求里。浏览器历史、书签和把整段链接转发出去仍会泄露它。
+页面读到后会从地址栏去掉 #k=，并且不写入 localStorage 或草稿。持该链接的人直接点提交，口令框不挡。
+本包不包含真实密钥。密钥只在你本机生成并写入上面的 0600 文件。
 
 3) 莉莉丝读回（私密机器上的 CLI，网页没有读回）
 

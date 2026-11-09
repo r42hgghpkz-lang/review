@@ -45,7 +45,9 @@ install -m 0600 /dev/null /path/outside-repo/liuguang-submit-secret
 - 想把落盘密钥和作者口令分开时，再设 `LIUGUANG_DATA_KEY_FILE`（同样 `0600`）
 - 不要去打开或修改章节审阅口令。本程序不会读它
 
-作者在网页里现填口令。不要让作者复制浏览器里的会话令牌。
+作者用同一页的 `#k=` 片段打开，不必再填口令。页面立刻用 `history.replaceState` 从地址栏去掉片段，密钥只留在内存里去换 bearer，不进 localStorage，也不进草稿。会话令牌不是密钥。不要让作者复制令牌。
+
+`#k=` 不是 HTTP 请求的一部分，GitHub Pages 收不到它。浏览器历史、书签，以及分享整段链接，仍然会泄露密钥。不要把带片段的地址写进仓库、日志或页面文件。
 
 ## 起进程
 
@@ -56,11 +58,11 @@ export LIUGUANG_ANSWERS_ROOT=/workspace/tmp/liuguang-design-20261109/answers
 export LIUGUANG_SUBMIT_PASSWORD_FILE=/path/outside-repo/liuguang-submit-secret
 export LIUGUANG_ALLOWED_ORIGINS=https://r42hgghpkz-lang.github.io
 export LIUGUANG_BIND=127.0.0.1
-export LIUGUANG_PORT=8791
-./run.sh
+export LIUGUANG_PORT=8793
+python3 server.py
 ```
 
-看到 `LIUGUANG_READY bind=127.0.0.1 port=8791` 再去配路由。生产不要设置 `LIUGUANG_KDF_ITERS`。
+看到 `LIUGUANG_READY bind=127.0.0.1 port=8793` 再去配路由。默认端口是 8793，因为本机 8791 已被 sand-host 占用。`LIUGUANG_PORT` 可以改成别的空闲端口。生产不要设置 `LIUGUANG_KDF_ITERS`。
 
 监听默认只在本机。公开的 HTTPS 要由你前面的路由终止，再转到这个端口。日志只记方法、路径和状态码。
 
@@ -82,14 +84,14 @@ export LIUGUANG_PORT=8791
 没有稳定入站时，可以用本机已有的 `cloudflared` 做一次真网络往返。URL 每次都会变，停掉进程就失效，不能写进仓库当长期地址。
 
 ```sh
-cloudflared tunnel --url http://127.0.0.1:8791 --no-autoupdate
+cloudflared tunnel --url http://127.0.0.1:8793 --no-autoupdate
 ```
 
 把终端里出现的 `https://<random>.trycloudflare.com` 填进**即将发布的那份** `gateway.json`（或只在试验页的 `?gw=` 上使用）。试验完停掉 `cloudflared`。历史 quick tunnel 地址不要复用。
 
 ### 长期：现在还没有
 
-需要一条你自己控制的稳定 HTTPS 路由，指到 `127.0.0.1:8791`。named tunnel、现有反向代理都可以。本环境没有受控域名，也没有这条路由。长期地址确定之后，再把那个源写进发布用的 `gateway.json`，然后只发布静态树。
+需要一条你自己控制的稳定 HTTPS 路由，指到 `127.0.0.1` 上你选的 `LIUGUANG_PORT`（默认 8793，避开已被占用的 8791）。named tunnel、现有反向代理都可以。本环境没有受控域名，也没有这条路由。长期地址确定之后，再把那个源写进发布用的 `gateway.json`，然后只发布静态树。
 
 ## 静态页怎么发布才不会把网关源码公开
 
