@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
+<meta name="color-scheme" content="light dark"/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<title>流光 · 问题勾选｜2026-11-09</title>
+<style>
+:root{
+  --bg:#0f1115; --bg2:#181b22; --card:#1e222b; --border:#2c3340;
+  --text:#e8eaed; --muted:#9aa3b2; --accent:#6ea8fe; --accent2:#3dd68c;
+  --warn:#f0b429; --danger:#f07178; --park:#c4a7e7;
+  --tap:48px; --radius:14px; --shadow:0 1px 0 rgba(255,255,255,.04) inset;
+  --font:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+}
+@media (prefers-color-scheme: light){
+  :root{
+    --bg:#f4f6f8; --bg2:#ffffff; --card:#ffffff; --border:#d8dee6;
+    --text:#1a1d24; --muted:#5b6573; --accent:#2563eb; --accent2:#059669;
+    --warn:#b45309; --danger:#dc2626; --park:#7c3aed;
+    --shadow:0 1px 2px rgba(16,24,40,.06);
+  }
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:var(--font);line-height:1.45;-webkit-text-size-adjust:100%}
+a{color:var(--accent)}
+header.app{
+  position:sticky;top:0;z-index:40;background:color-mix(in srgb,var(--bg2) 92%,transparent);
+  backdrop-filter:blur(10px);border-bottom:1px solid var(--border);
+  padding:10px 14px calc(10px + env(safe-area-inset-top));
+}
+header.app h1{font-size:1.05rem;margin:0 0 6px;font-weight:700}
+.progress{display:flex;flex-wrap:wrap;gap:8px;font-size:.82rem;color:var(--muted)}
+.pill{background:var(--card);border:1px solid var(--border);border-radius:999px;padding:4px 10px}
+.pill b{color:var(--text)}
+.pill.ok b{color:var(--accent2)}
+.pill.park b{color:var(--park)}
+.pill.open b{color:var(--warn)}
+.toolbar{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+button,.btn{
+  appearance:none;border:1px solid var(--border);background:var(--card);color:var(--text);
+  border-radius:12px;min-height:var(--tap);padding:10px 14px;font-size:.95rem;font-weight:600;
+  cursor:pointer;box-shadow:var(--shadow);touch-action:manipulation;
+}
+button.primary{background:var(--accent);border-color:transparent;color:#fff}
+button.danger{background:transparent;border-color:var(--danger);color:var(--danger)}
+button:active{transform:scale(.98);opacity:.92}
+nav.toc{display:flex;gap:8px;overflow-x:auto;-webkit-overflow-scrolling:touch;padding:8px 14px;border-bottom:1px solid var(--border);background:var(--bg2)}
+nav.toc a{flex:0 0 auto;text-decoration:none;color:var(--muted);border:1px solid var(--border);border-radius:999px;padding:8px 12px;font-size:.85rem;min-height:40px;display:inline-flex;align-items:center}
+nav.toc a:hover{color:var(--text);border-color:var(--accent)}
+main{padding:12px 12px calc(96px + env(safe-area-inset-bottom));max-width:720px;margin:0 auto}
+.section{margin:0 0 18px}
+.section > h2{
+  position:sticky;top:88px;z-index:20;background:var(--bg);padding:10px 4px;margin:0 0 8px;
+  font-size:1.05rem;border-bottom:1px solid var(--border)
+}
+.note{color:var(--muted);font-size:.85rem;background:var(--card);border:1px dashed var(--border);border-radius:var(--radius);padding:10px 12px;margin:0 0 10px;white-space:pre-wrap}
+.group{color:var(--muted);font-size:.8rem;font-weight:600;margin:14px 2px 6px;letter-spacing:.02em}
+.card{
+  background:var(--card);border:1px solid var(--border);border-radius:var(--radius);
+  padding:12px;margin:0 0 10px;box-shadow:var(--shadow)
+}
+.card.done{border-color:color-mix(in srgb,var(--accent2) 55%,var(--border))}
+.card.parked{border-color:color-mix(in srgb,var(--park) 55%,var(--border))}
+.qid{font-weight:800;color:var(--accent);font-variant-numeric:tabular-nums;margin-right:6px}
+.qtext{white-space:pre-wrap;font-size:.98rem}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:10px}
+.status-toggle{display:flex;gap:6px;flex-wrap:wrap}
+.status-toggle button{
+  min-height:40px;padding:8px 12px;font-size:.85rem;font-weight:600;opacity:.75
+}
+.status-toggle button.active.open{opacity:1;border-color:var(--warn);color:var(--warn)}
+.status-toggle button.active.answered{opacity:1;border-color:var(--accent2);color:var(--accent2)}
+.status-toggle button.active.parked{opacity:1;border-color:var(--park);color:var(--park)}
+label.field{display:flex;flex-direction:column;gap:4px;flex:1 1 100%;font-size:.8rem;color:var(--muted);margin-top:8px}
+textarea,input[type=date],input[type=text]{
+  width:100%;min-height:44px;border-radius:12px;border:1px solid var(--border);
+  background:var(--bg);color:var(--text);padding:10px 12px;font-size:16px;font-family:inherit;
+}
+textarea{min-height:88px;resize:vertical}
+.hint{font-size:.75rem;color:var(--muted);margin-top:4px}
+footer.bar{
+  position:fixed;left:0;right:0;bottom:0;z-index:50;
+  background:color-mix(in srgb,var(--bg2) 94%,transparent);backdrop-filter:blur(10px);
+  border-top:1px solid var(--border);padding:10px 12px calc(10px + env(safe-area-inset-bottom));
+  display:flex;gap:8px;justify-content:center;flex-wrap:wrap
+}
+.toast{
+  position:fixed;left:50%;bottom:88px;transform:translateX(-50%);
+  background:#111;color:#fff;padding:10px 14px;border-radius:999px;font-size:.9rem;
+  opacity:0;pointer-events:none;transition:opacity .2s;z-index:60;max-width:90vw;text-align:center
+}
+.toast.show{opacity:.95}
+.modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:70;display:none;align-items:flex-end;justify-content:center}
+.modal-bg.show{display:flex}
+.modal{background:var(--bg2);border:1px solid var(--border);border-radius:16px 16px 0 0;padding:16px;width:100%;max-width:720px;max-height:70vh;overflow:auto}
+.modal h3{margin:0 0 8px}
+.modal pre{white-space:pre-wrap;word-break:break-word;background:var(--bg);border:1px solid var(--border);border-radius:12px;padding:10px;font-size:.75rem;max-height:40vh;overflow:auto}
+.filter{display:flex;gap:6px;overflow-x:auto;padding:8px 14px;background:var(--bg)}
+.filter button{min-height:36px;padding:6px 12px;font-size:.8rem;opacity:.8}
+.filter button.active{opacity:1;border-color:var(--accent);color:var(--accent)}
+</style>
+</head>
+<body>
+<header class="app">
+  <h1>流光 · 问题勾选｜2026-11-09</h1>
+  <div class="progress">
+    <span class="pill ok">已答 <b id="c-answered">0</b></span>
+    <span class="pill park">挂起 <b id="c-parked">0</b></span>
+    <span class="pill open">未答 <b id="c-open">0</b></span>
+    <span class="pill">合计 <b id="c-total">0</b></span>
+  </div>
+  <div class="toolbar">
+    <button type="button" class="primary" id="btn-export">导出 JSON</button>
+    <button type="button" id="btn-import">粘贴导入</button>
+    <button type="button" class="danger" id="btn-clear">清空本机草稿</button>
+  </div>
+</header>
+<nav class="toc" id="toc" aria-label="章节"></nav>
+<div class="filter" id="filter">
+  <button type="button" class="active" data-f="all">全部</button>
+  <button type="button" data-f="open">未答</button>
+  <button type="button" data-f="answered">已答</button>
+  <button type="button" data-f="parked">挂起</button>
+</div>
+<main id="main"></main>
+<footer class="bar">
+  <button type="button" class="primary" id="btn-export2">导出 JSON</button>
+  <button type="button" id="btn-copy">复制到剪贴板</button>
+</footer>
+<div class="toast" id="toast"></div>
+<div class="modal-bg" id="modal">
+  <div class="modal">
+    <h3 id="modal-title">导出</h3>
+    <p class="hint" id="modal-hint">把下面 JSON 发给莉莉丝／流光即可恢复答案。</p>
+    <pre id="modal-pre"></pre>
+    <div class="toolbar">
+      <button type="button" class="primary" id="modal-copy">复制</button>
+      <button type="button" id="modal-dl">下载 .json</button>
+      <button type="button" id="modal-close">关闭</button>
+    </div>
+    <div id="import-box" style="display:none;margin-top:10px">
+      <label class="field">粘贴导出的 JSON
+        <textarea id="import-ta" placeholder='{"version":1,...}'></textarea>
+      </label>
+      <button type="button" class="primary" id="modal-import-go">导入并覆盖本机</button>
+    </div>
+  </div>
+</div>
+<script>
+const SECTIONS = [{"id": "1", "title": "马耳他公寓／今日入住对接（优先）", "note": null, "items": [{"id": "1.1", "text": "今天入住对接人是谁？（姓名／称呼即可）", "group": "对接与进入"}, {"id": "1.2", "text": "主要通过什么渠道联系？（短信／WhatsApp／Telegram／电话／邮件／平台站内信）", "group": "对接与进入"}, {"id": "1.3", "text": "对接人是否已回过你今天的消息？若没有，你希望流光何时提醒你再跟一次？（写一个时间即可）", "group": "对接与进入"}, {"id": "1.4", "text": "约定的见面／交钥匙时间是几点（当地）？有没有弹性窗口？", "group": "对接与进入"}, {"id": "1.5", "text": "公寓准确地址你手头有没有？（有／没有／在某封邮件或平台里但还没打开）", "group": "对接与进入"}, {"id": "1.6", "text": "进门方式是哪种：当面交钥匙／密码锁／智能锁码／门禁卡／前台取／其他？", "group": "对接与进入"}, {"id": "1.7", "text": "若有门锁码／门禁说明：你是否已保存到本机笔记？（有／没有／稍后）", "group": "对接与进入"}, {"id": "1.8", "text": "钥匙／门卡数量？有没有备用？丢了找谁？", "group": "对接与进入"}, {"id": "1.9", "text": "押金／入住费：是否已付清？还有尾款吗？（金额可不写，只写状态）", "group": "对接与进入"}, {"id": "1.10", "text": "入住「今天算完成」的最低标准是什么？（例：拿到钥匙并能进门／拍到房间照片／接通水电 Wi‑Fi 等，你定）", "group": "对接与进入"}, {"id": "1.11", "text": "床单被褥：房里有没有现成？够不够今晚睡？", "group": "屋内基本物资"}, {"id": "1.12", "text": "毛巾：有没有？要不要自己买？", "group": "屋内基本物资"}, {"id": "1.13", "text": "厨房：有没有锅／碗／刀叉／热水壶／微波炉／冰箱？", "group": "屋内基本物资"}, {"id": "1.14", "text": "今晚是否需要先买一次性餐具或外卖就行？", "group": "屋内基本物资"}, {"id": "1.15", "text": "垃圾桶／垃圾袋在哪里？出门垃圾怎么扔？（楼道／楼下／指定日）", "group": "屋内基本物资"}, {"id": "1.16", "text": "洗衣机：有没有？洗衣液有没有？附近有无自助洗衣？", "group": "屋内基本物资"}, {"id": "1.17", "text": "清洁用品（拖把／洗洁精／纸巾）到位情况？", "group": "屋内基本物资"}, {"id": "1.18", "text": "Wi‑Fi：账号密码是否已拿到？测过能上吗？", "group": "网络与设施"}, {"id": "1.19", "text": "若 Wi‑Fi 不通，备选是手机热点还是去咖啡馆？", "group": "网络与设施"}, {"id": "1.20", "text": "暖气／空调：开关在哪？今晚要不要提前开？", "group": "网络与设施"}, {"id": "1.21", "text": "热水：是即热／水箱／需提前开？", "group": "网络与设施"}, {"id": "1.22", "text": "电闸／总开关位置知道吗？（万一跳闸）", "group": "网络与设施"}, {"id": "1.23", "text": "是否需要拍几张「钥匙／说明书／电闸／Wi‑Fi 贴纸」存私密收据？（你愿不愿意拍）", "group": "网络与设施"}, {"id": "1.24", "text": "邻居／噪音规则：几点后安静？可否开窗？", "group": "规则与应急"}, {"id": "1.25", "text": "访客／过夜客人有无限制？", "group": "规则与应急"}, {"id": "1.26", "text": "紧急联系人：房东／物业／对接人的备用电话有没有？", "group": "规则与应急"}, {"id": "1.27", "text": "当地报警／医疗紧急号码你想不想先存进手机？（只需是／否／稍后）", "group": "规则与应急"}, {"id": "1.28", "text": "还有哪一件「不搞定会睡不好」的事？（请直接点名；没有就写「无」）", "group": "规则与应急"}]}, {"id": "2", "title": "马耳他落地生活（头几天）", "note": null, "items": [{"id": "2.1", "text": "电源：当地插头类型你确认过吗？转换器带了几个？今晚充电是否够用？", "group": null}, {"id": "2.2", "text": "手机：用实体 SIM、eSIM，还是漫游？是否已能打电话／收验证码？", "group": null}, {"id": "2.3", "text": "若还没本地号：今天要不要办？还是先用漫游扛几天？", "group": null}, {"id": "2.4", "text": "支付：现金／刷卡／手机支付，你更依赖哪一种？附近 ATM 是否需要找？", "group": null}, {"id": "2.5", "text": "自来水：你打算直接喝、烧开喝，还是只买瓶装？", "group": null}, {"id": "2.6", "text": "今晚第一顿：外卖／超市简餐／下馆子／已自备？有没有偏好或忌口要记？", "group": null}, {"id": "2.7", "text": "最近的超市／便利店：你是否已有目标店名或地图钉？没有的话要不要流光稍后帮你列候选（不代下单）？", "group": null}, {"id": "2.8", "text": "药店：常备药带了吗？有没有「落地必买」的清单？", "group": null}, {"id": "2.9", "text": "垃圾收集日／分类规则：知道／不知道／挂到入住后再查？", "group": null}, {"id": "2.10", "text": "头三天「生活最低完备」清单里，你个人排序前三是什么？（例：水、电、网、食物、洗漱、交通卡）", "group": null}]}, {"id": "3", "title": "出行／证件（若仍相关）", "note": null, "items": [{"id": "3.1", "text": "护照有效期你是否已核对到够用？（够／不够／未查／不适用）", "group": null}, {"id": "3.2", "text": "回程或下一程机票／船票：是否已有，还是纯落地？", "group": null}, {"id": "3.3", "text": "托运行李／随身行李：有没有未取回或在途的？", "group": null}, {"id": "3.4", "text": "机场→公寓：若今天或近日还要走一趟，你倾向 taxi／Bolt／Uber／公交／接机？当地常用叫车 App 你有没有装？", "group": null}, {"id": "3.5", "text": "交通卡／周票：要不要办？还是按次？", "group": null}, {"id": "3.6", "text": "还有没有「证件／票据照片」想单独建一个私密夹提醒？（是／否）", "group": null}]}, {"id": "4", "title": "今日日程块（2026-11-09 周一 · Asia/Shanghai）", "note": null, "items": [{"id": "4.1", "text": "今天「必回」你心里已经有具体哪一封／哪一类吗？是哪一个？", "group": "12:00–13:00 邮件（必回优先）"}, {"id": "4.2", "text": "若不明确：优先看哪个邮箱／账号？（可写多个）", "group": "12:00–13:00 邮件（必回优先）"}, {"id": "4.3", "text": "今天邮件块的成功标准是什么？（例：发出 1 封必回／只整理出必回清单／读完某线程）", "group": "12:00–13:00 邮件（必回优先）"}, {"id": "4.4", "text": "有没有明确「今天绝对不回」的类别？（营销／群发／可挂起等）", "group": "12:00–13:00 邮件（必回优先）"}, {"id": "4.5", "text": "需要流光／莉莉丝**只提醒、不代发**即可，还是你希望整理草稿后你自己发？（默认不代发）", "group": "12:00–13:00 邮件（必回优先）"}, {"id": "4.6", "text": "邮件块结束后，未回项的 `review_at` 你希望订在几点／哪天？", "group": "12:00–13:00 邮件（必回优先）"}, {"id": "4.7", "text": "「算力」这一项：公司／项目名你希望卡片上怎么称呼？", "group": "13:30–14:15 算力 ＋ 支付公司跟进"}, {"id": "4.8", "text": "今天这块是通话、面谈、线上会，还是自己推进文档／报价？", "group": "13:30–14:15 算力 ＋ 支付公司跟进"}, {"id": "4.9", "text": "算力侧：你今天想推进到的**下一里程碑**是什么？（一句话）", "group": "13:30–14:15 算力 ＋ 支付公司跟进"}, {"id": "4.10", "text": "算力侧：当前最大阻塞是什么？", "group": "13:30–14:15 算力 ＋ 支付公司跟进"}, {"id": "4.11", "text": "需要准备的材料有哪些？（链接／报价／账号／截图／合同页）谁去准备？（你／莉莉丝／他人）", "group": "13:30–14:15 算力 ＋ 支付公司跟进"}, {"id": "4.12", "text": "「支付公司」跟进：公司怎么称呼？跟进目标是什么？（例：确认接口／合同条款／上线时间——**不是付款**）", "group": "13:30–14:15 算力 ＋ 支付公司跟进"}, {"id": "4.13", "text": "支付公司侧：最大卡点是什么？对方上次回复大概是什么时候？（可粗）", "group": "13:30–14:15 算力 ＋ 支付公司跟进"}, {"id": "4.14", "text": "若对方今天无回复：你希望何时再跟？（写 `review_at`）", "group": "13:30–14:15 算力 ＋ 支付公司跟进"}, {"id": "4.15", "text": "算力与支付公司：同一块时间里你更想先做哪一个？", "group": "13:30–14:15 算力 ＋ 支付公司跟进"}, {"id": "4.16", "text": "这个日历块对你来说「完成」等于什么？（与 §1.1 最低标准对齐或另写）", "group": "14:15–15:00 马耳他公寓准备块"}, {"id": "4.17", "text": "块内只做「确认对接」还是也包括「购物／拍照／测网」？", "group": "14:15–15:00 马耳他公寓准备块"}, {"id": "4.18", "text": "若对接推迟：这块是改挂、缩成 15 分钟，还是保持占位但不催？", "group": "14:15–15:00 马耳他公寓准备块"}, {"id": "4.19", "text": "德业：当前阶段？（接触／报价／等回复／已冷／其他）", "group": "德业／Atome（机动，无独立硬块）"}, {"id": "4.20", "text": "德业：你今天**希望推进一步**的具体动作是什么？还是明确挂起？", "group": "德业／Atome（机动，无独立硬块）"}, {"id": "4.21", "text": "德业：若挂起，挂到哪一天再看？（写日期）", "group": "德业／Atome（机动，无独立硬块）"}, {"id": "4.22", "text": "Atome：当前阶段？", "group": "德业／Atome（机动，无独立硬块）"}, {"id": "4.23", "text": "Atome：今天要推进一步，还是挂起？挂到哪天？", "group": "德业／Atome（机动，无独立硬块）"}, {"id": "4.24", "text": "德业／Atome 的 owner 默认是谁？（你本人／莉莉丝跟催／其他人）", "group": "德业／Atome（机动，无独立硬块）"}, {"id": "4.25", "text": "除已有提醒外，还需要任何会前材料准备吗？（默认不问摘要；有则写「需要什么」）", "group": "17:00 周会占位（已有 16:45 提醒）"}, {"id": "4.26", "text": "若会取消／你不去：要不要改日历，还是保持占位即可？", "group": "17:00 周会占位（已有 16:45 提醒）"}, {"id": "4.27", "text": "眼镜与 Goldwin：是同一件事还是两件？", "group": "眼镜／Goldwin（已延后）"}, {"id": "4.28", "text": "你希望最早何时重新打开讨论？（写日期或「本周不碰」）", "group": "眼镜／Goldwin（已延后）"}, {"id": "4.29", "text": "有没有已有店名／城市／链接线索？（可空）", "group": "眼镜／Goldwin（已延后）"}, {"id": "4.30", "text": "是否允许流光在你写的日期之前完全静音这两项？", "group": "眼镜／Goldwin（已延后）"}]}, {"id": "5", "title": "团队沟通渠道（Telegram vs WhatsApp）", "note": null, "items": [{"id": "5.1", "text": "日常「工作分发／管理」＋流光 Harness 跟进核心项目，你更想主用 Telegram、WhatsApp，还是双开？", "group": null}, {"id": "5.2", "text": "与**人工员工**协同：他们现在主要在哪个 App？有没有必须迁就的一方？", "group": null}, {"id": "5.3", "text": "WhatsApp 扫码接入：上午约过 11:00——**今天还要做吗**？还是再改期？（改到几点／哪天）", "group": null}, {"id": "5.4", "text": "Telegram：更想用 **Bot** 收派任务，还是个人号／群直接说？", "group": null}, {"id": "5.5", "text": "若上 Bot：你能接受「指令式短消息」吗？还是只要人话摘要？", "group": null}, {"id": "5.6", "text": "哪些内容**禁止**进群／渠道？（例：马耳他住址、钥匙、健康、付款凭证）", "group": null}, {"id": "5.7", "text": "渠道选型你希望谁在什么时候给一份对比结论？（莉莉丝／小沐／你自己扫一眼）", "group": null}, {"id": "5.8", "text": "在渠道未定前：临时默认继续用现有聊天即可吗？", "group": null}]}, {"id": "6", "title": "流光产品／Harness 偏好（只补未锁缺口）", "note": "已锁可跳过：独立项目、不并文枢树、`design_ready`、允许不完整 capture、整理结束＝`next_action`+`owner`+`review_at`、安排≠完成、无回复≠完成、不以清空为休息条件、私密不进共享。Mac 布局仍 proposed，**本表不问技术建盘**。", "items": [{"id": "6.1", "text": "日常 capture：你更常语音、打字聊天，还是两者都要？", "group": null}, {"id": "6.2", "text": "一条随口记之后，你希望多久内看到「已落盘」回执？（立刻一句／跟进窗合并／无所谓）", "group": null}, {"id": "6.3", "text": "「一天算过得去」对你个人的最小定义是什么？（例：住进门＋回了那封必回／或只要求头脑清明不看完成数）", "group": null}, {"id": "6.4", "text": "跟进默认 owner 分工你是否同意这个草案？  \n- 莉莉丝：对你转问、守节奏、外态防重\n- 小沐：产品／实现闸\n- 你：拍板与私密事实\n- 流光（系统）：整理缺口、选题、落盘\n（同意／要改哪一条）", "group": null}, {"id": "6.5", "text": "同一事项一天内被问第二次：你什么情况下可以接受？（你主动展开／安全依赖／绝不）", "group": null}, {"id": "6.6", "text": "周试点（至 2026-11-16）复盘：用现有 10／16／19 里某一窗短问即可——你更想用哪一窗？", "group": null}, {"id": "6.7", "text": "进展收据你想不想在聊天里看到「短回执」？（要／只要落盘不要刷屏）", "group": null}]}, {"id": "7", "title": "舒适与打扰边界（非治疗；流程偏好）", "note": null, "items": [{"id": "7.1", "text": "安静时段：工作日希望几点到几点默认不主动找你？（可写多段）", "group": null}, {"id": "7.2", "text": "周末：完全静音／仅紧急／仅你点名的主题？", "group": null}, {"id": "7.3", "text": "什么算「打扰」？（例：连续追问、未约的多题、完成率语气、夜间气泡）", "group": null}, {"id": "7.4", "text": "什么算「舒服」？（例：一次给长清单你自己勾、短回执、可挂起带日期）", "group": null}, {"id": "7.5", "text": "你刚刚选择「长清单一次给全」——是否确认：**优先整表**，日常跟进窗不再故意限成 1–2 问？还是「库存用长表，日常仍可短问」？", "group": null}, {"id": "7.6", "text": "「挂起至 DATE」的写法你更喜欢哪种？  \n- `parked until YYYY-MM-DD`\n- 「先放着，X 号再说」\n- 其他（请写）", "group": null}, {"id": "7.7", "text": "挂起到期时：只在跟进窗轻轻提一次，还是进日历块？", "group": null}, {"id": "7.8", "text": "若你当天明显在赶路／入睡：是否允许系统自动降噪到「只收不发」直到你下一句？", "group": null}]}, {"id": "8", "title": "健康数据探索（仅免费路径；非诊疗）", "note": "公开资料下：付费 HAE／付费开发者默认路径已排除；**尚未**找到同时满足「免费＋State of Mind 自动化＋省心」的核实方案。睡眠可读 ≠ 心境已通。心境记录本身是你的主观记录，流光**不会**据此自动改日程。", "items": [{"id": "8.1", "text": "你是否仍想继续探索「免费」路线？还是整项挂起？", "group": null}, {"id": "8.2", "text": "若继续：是否愿意在 iPhone「快捷指令 → Find Health Samples」里**自己看一眼**类型列表里有没有 State of Mind／心境？（只验证有无类型，不装付费 App）", "group": null}, {"id": "8.3", "text": "若验证麻烦：直接 `parked until` 哪一天？", "group": null}, {"id": "8.4", "text": "睡眠数据：你现在有没有稳定来源（如手表）？没有的话是否接受「先不做睡眠自动化」？", "group": null}, {"id": "8.5", "text": "任何健康相关：是否继续坚持「不付费、不默认开发者账号」？", "group": null}]}, {"id": "9", "title": "文枢／编辑向跟进（莉莉丝追交付；本周是否要你拍板）", "note": null, "items": [{"id": "9.1", "text": "「学习周报 remediation」：本周你需要看结论／勾选项吗？还是完全交给莉莉丝追到交付、你只在被点名时出现？", "group": null}, {"id": "9.2", "text": "「小沐＋Codex 文枢优化」：本周是否有必须你拍的产品点？没有则挂到哪天？", "group": null}, {"id": "9.3", "text": "编辑学习例程曾连续失败（派题／周报）：你是否要在流光里建一条**去标识**的跟踪卡（只记状态／owner／review_at），还是留在文枢轨、流光不管？", "group": null}, {"id": "9.4", "text": "同学录正文／开篇抓力等文学项：确认**不**并入流光今日清单？（默认不并入）", "group": null}]}, {"id": "10", "title": "其他开放环／残留未知", "note": null, "items": [{"id": "10.1", "text": "今天还有没有「脑子里转着、但上面都没写到」的事？请点名（可极短）。", "group": null}, {"id": "10.2", "text": "对马耳他生活，若你其实已经知道一部分答案：哪些题可以整段划掉以免重复问？（写出节号或关键词）", "group": null}, {"id": "10.3", "text": "有没有人／Bot 不该碰某类话题？（点名即可）", "group": null}, {"id": "10.4", "text": "今日结束后，你希望收到的唯一一句日末回执长什么样？（例：「公寓进门√；邮件必回仍 pending，review 明天 10:00」／或「无新问」）", "group": null}, {"id": "10.5", "text": "本清单答完一批后：下次全量重扫的最早日期？（建议试点结束 2026-11-16；你可改）", "group": null}, {"id": "10.6", "text": "若只能先答 **5 题**：你指定哪 5 个 checkbox？（写题号）——其余全部按你的 park 规则挂起。", "group": null}]}];
+const STORAGE_KEY = 'liuguang-checklist-20261109-v1';
+const state = loadState();
+let filter = 'all';
+
+function loadState(){
+  try{
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if(!raw) return {answers:{}};
+    const o = JSON.parse(raw);
+    return {answers: o.answers || {}};
+  }catch(e){ return {answers:{}}; }
+}
+function saveState(){
+  const payload = {
+    version: 1,
+    title: '流光 · 问题勾选｜2026-11-09',
+    savedAt: new Date().toISOString(),
+    tzHint: 'Asia/Shanghai',
+    answers: state.answers
+  };
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(payload));
+  updateProgress();
+}
+function getAns(id){
+  return state.answers[id] || {status:'open', text:'', parkUntil:''};
+}
+function setAns(id, patch){
+  state.answers[id] = Object.assign(getAns(id), patch, {updatedAt: new Date().toISOString()});
+  saveState();
+  const card = document.querySelector(`[data-qid="${CSS.escape(id)}"]`);
+  if(card) paintCard(card, id);
+  applyFilter();
+}
+function toast(msg){
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  clearTimeout(toast._t);
+  toast._t = setTimeout(()=>t.classList.remove('show'), 1800);
+}
+function escapeHtml(s){
+  return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+function updateProgress(){
+  let answered=0, parked=0, open=0, total=0;
+  SECTIONS.forEach(sec => sec.items.forEach(it => {
+    total++;
+    const st = getAns(it.id).status;
+    if(st==='answered') answered++;
+    else if(st==='parked') parked++;
+    else open++;
+  }));
+  document.getElementById('c-answered').textContent = answered;
+  document.getElementById('c-parked').textContent = parked;
+  document.getElementById('c-open').textContent = open;
+  document.getElementById('c-total').textContent = total;
+}
+function paintCard(card, id){
+  const a = getAns(id);
+  card.classList.toggle('done', a.status==='answered');
+  card.classList.toggle('parked', a.status==='parked');
+  card.querySelectorAll('.status-toggle button').forEach(b=>{
+    b.classList.toggle('active', b.dataset.st===a.status);
+  });
+  const ta = card.querySelector('textarea');
+  const date = card.querySelector('input[type=date]');
+  if(ta && ta.value !== (a.text||'')) ta.value = a.text||'';
+  if(date && date.value !== (a.parkUntil||'')) date.value = a.parkUntil||'';
+  card.dataset.status = a.status;
+}
+function render(){
+  const toc = document.getElementById('toc');
+  const main = document.getElementById('main');
+  toc.innerHTML = '';
+  main.innerHTML = '';
+  SECTIONS.forEach(sec => {
+    const a = document.createElement('a');
+    a.href = '#sec-'+sec.id;
+    a.textContent = sec.id + '. ' + sec.title.split('（')[0].slice(0,10);
+    toc.appendChild(a);
+
+    const wrap = document.createElement('section');
+    wrap.className = 'section';
+    wrap.id = 'sec-'+sec.id;
+    const h2 = document.createElement('h2');
+    h2.textContent = sec.id + '. ' + sec.title;
+    wrap.appendChild(h2);
+    if(sec.note){
+      const n = document.createElement('div');
+      n.className = 'note';
+      n.textContent = sec.note;
+      wrap.appendChild(n);
+    }
+    let lastGroup = null;
+    sec.items.forEach(it => {
+      if(it.group && it.group !== lastGroup){
+        lastGroup = it.group;
+        const g = document.createElement('div');
+        g.className = 'group';
+        g.textContent = it.group;
+        wrap.appendChild(g);
+      }
+      const card = document.createElement('article');
+      card.className = 'card';
+      card.dataset.qid = it.id;
+      card.innerHTML = `
+        <div class="qtext"><span class="qid">${escapeHtml(it.id)}</span>${escapeHtml(it.text)}</div>
+        <div class="row status-toggle" role="group" aria-label="状态">
+          <button type="button" data-st="open" class="open">未答</button>
+          <button type="button" data-st="answered" class="answered">已答</button>
+          <button type="button" data-st="parked" class="parked">挂起</button>
+        </div>
+        <label class="field">答案／备注
+          <textarea data-field="text" placeholder="按题号随口写；私密细节可写「已存本机」"></textarea>
+        </label>
+        <label class="field">挂起到（可选）
+          <input type="date" data-field="parkUntil"/>
+        </label>
+        <div class="hint">未答默认挂起；填日期后点「挂起」。答案只存在本机浏览器，导出前不会上传。</div>
+      `;
+      card.querySelectorAll('.status-toggle button').forEach(btn=>{
+        btn.addEventListener('click', ()=>{
+          const st = btn.dataset.st;
+          const patch = {status: st};
+          if(st==='parked' && !getAns(it.id).parkUntil){
+            // leave date empty for user
+          }
+          if(st==='answered' && !(getAns(it.id).text||'').trim() && !(card.querySelector('textarea').value||'').trim()){
+            // still allow mark answered
+          }
+          setAns(it.id, patch);
+        });
+      });
+      const ta = card.querySelector('textarea');
+      const date = card.querySelector('input[type=date]');
+      let tmr;
+      ta.addEventListener('input', ()=>{
+        clearTimeout(tmr);
+        tmr = setTimeout(()=>{
+          const text = ta.value;
+          const patch = {text};
+          const cur = getAns(it.id);
+          if(text.trim() && cur.status==='open') patch.status = 'answered';
+          setAns(it.id, patch);
+        }, 250);
+      });
+      date.addEventListener('change', ()=>{
+        const parkUntil = date.value;
+        const patch = {parkUntil};
+        if(parkUntil) patch.status = 'parked';
+        setAns(it.id, patch);
+      });
+      wrap.appendChild(card);
+      paintCard(card, it.id);
+    });
+    main.appendChild(wrap);
+  });
+  updateProgress();
+  applyFilter();
+}
+function applyFilter(){
+  document.querySelectorAll('.card').forEach(card=>{
+    const st = card.dataset.status || 'open';
+    const show = filter==='all' || filter===st;
+    card.style.display = show ? '' : 'none';
+  });
+  // hide empty groups? skip for simplicity
+}
+document.getElementById('filter').addEventListener('click', (e)=>{
+  const b = e.target.closest('button[data-f]');
+  if(!b) return;
+  filter = b.dataset.f;
+  document.querySelectorAll('#filter button').forEach(x=>x.classList.toggle('active', x===b));
+  applyFilter();
+});
+function buildExport(){
+  const answers = {};
+  SECTIONS.forEach(sec => sec.items.forEach(it => {
+    const a = getAns(it.id);
+    if(a.status!=='open' || (a.text||'').trim() || a.parkUntil){
+      answers[it.id] = {
+        status: a.status,
+        text: a.text||'',
+        parkUntil: a.parkUntil||'',
+        question: it.text,
+        section: sec.id + '. ' + sec.title,
+        updatedAt: a.updatedAt||null
+      };
+    }
+  }));
+  return {
+    version: 1,
+    title: '流光 · 问题勾选｜2026-11-09',
+    exportedAt: new Date().toISOString(),
+    tzHint: 'Asia/Shanghai',
+    counts: {
+      answered: Object.values(answers).filter(x=>x.status==='answered').length,
+      parked: Object.values(answers).filter(x=>x.status==='parked').length,
+      totalQuestions: SECTIONS.reduce((n,s)=>n+s.items.length,0),
+      exportedNonOpen: Object.keys(answers).length
+    },
+    answers
+  };
+}
+function showModal(mode){
+  const m = document.getElementById('modal');
+  const title = document.getElementById('modal-title');
+  const hint = document.getElementById('modal-hint');
+  const pre = document.getElementById('modal-pre');
+  const ib = document.getElementById('import-box');
+  if(mode==='export'){
+    title.textContent = '导出 JSON';
+    hint.textContent = '复制或下载后发给莉莉丝／流光；私密答案默认只在本机，导出才离开浏览器。';
+    pre.style.display = '';
+    pre.textContent = JSON.stringify(buildExport(), null, 2);
+    ib.style.display = 'none';
+  } else {
+    title.textContent = '粘贴导入';
+    hint.textContent = '粘贴之前导出的 JSON，将覆盖本机对应题号的答案。';
+    pre.style.display = 'none';
+    ib.style.display = '';
+  }
+  m.classList.add('show');
+}
+function hideModal(){ document.getElementById('modal').classList.remove('show'); }
+async function copyText(text){
+  try{
+    await navigator.clipboard.writeText(text);
+    toast('已复制到剪贴板');
+    return true;
+  }catch(e){
+    // fallback
+    const ta = document.createElement('textarea');
+    ta.value = text; document.body.appendChild(ta); ta.select();
+    try{ document.execCommand('copy'); toast('已复制到剪贴板'); return true; }
+    catch(err){ toast('复制失败，请手动选中复制'); return false; }
+    finally{ document.body.removeChild(ta); }
+  }
+}
+function downloadJson(obj){
+  const blob = new Blob([JSON.stringify(obj,null,2)], {type:'application/json'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'liuguang-answers-20261109.json';
+  a.click();
+  URL.revokeObjectURL(url);
+  toast('已开始下载');
+}
+document.getElementById('btn-export').onclick = ()=>showModal('export');
+document.getElementById('btn-export2').onclick = ()=>showModal('export');
+document.getElementById('btn-copy').onclick = ()=>copyText(JSON.stringify(buildExport(), null, 2));
+document.getElementById('btn-import').onclick = ()=>showModal('import');
+document.getElementById('modal-close').onclick = hideModal;
+document.getElementById('modal').addEventListener('click', (e)=>{ if(e.target.id==='modal') hideModal(); });
+document.getElementById('modal-copy').onclick = ()=>copyText(document.getElementById('modal-pre').textContent);
+document.getElementById('modal-dl').onclick = ()=>downloadJson(buildExport());
+document.getElementById('modal-import-go').onclick = ()=>{
+  try{
+    const o = JSON.parse(document.getElementById('import-ta').value);
+    const ans = o.answers || o;
+    let n=0;
+    Object.keys(ans).forEach(id=>{
+      const v = ans[id];
+      if(v && typeof v === 'object'){
+        state.answers[id] = {
+          status: v.status||'open',
+          text: v.text||'',
+          parkUntil: v.parkUntil||'',
+          updatedAt: v.updatedAt || new Date().toISOString()
+        };
+        n++;
+      }
+    });
+    saveState();
+    render();
+    hideModal();
+    toast('已导入 '+n+' 条');
+  }catch(e){
+    toast('JSON 无法解析');
+  }
+};
+document.getElementById('btn-clear').onclick = ()=>{
+  if(!confirm('确认清空本机全部草稿？此操作不可撤销（除非你另有导出备份）。')) return;
+  state.answers = {};
+  localStorage.removeItem(STORAGE_KEY);
+  render();
+  toast('本机草稿已清空');
+};
+render();
+</script>
+</body>
+</html>
